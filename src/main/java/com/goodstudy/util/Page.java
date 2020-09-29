@@ -16,6 +16,13 @@ public class Page<T> {
         this.pageSize = pageSize;
     }
 
+    public Page(int currentPage, int pageSize, int totalDate, List<T> data) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalDate = totalDate;
+        this.data = data;
+    }
+
     public int getCurrentPage() {
         return currentPage;
     }
