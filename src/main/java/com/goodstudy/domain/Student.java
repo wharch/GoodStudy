@@ -1,7 +1,8 @@
 package com.goodstudy.domain;
 
-import java.util.Date;
-
+/*
+* 孙向锋
+* */
 public class Student {
 private int stu_id;
 private String stu_name;
@@ -12,7 +13,6 @@ private String stu_pwd;
 private String stu_email;
 private String stu_head_img;
 //空构造
-
     public Student() {
     }
 //有参构造

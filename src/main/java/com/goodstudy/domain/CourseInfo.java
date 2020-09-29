@@ -3,7 +3,7 @@ package com.goodstudy.domain;
 * 孙向锋
 * */
 
-public class Course_Info {
+public class CourseInfo {
     private int info_id;
     private String video;
     private String note;
@@ -11,11 +11,11 @@ public class Course_Info {
     private Course course;
     //无参
 
-    public Course_Info() {
+    public CourseInfo() {
     }
     //有参
 
-    public Course_Info(int info_id, String video, String note, Section section, Course course) {
+    public CourseInfo(int info_id, String video, String note, Section section, Course course) {
         this.info_id = info_id;
         this.video = video;
         this.note = note;

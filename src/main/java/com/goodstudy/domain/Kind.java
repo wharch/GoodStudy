@@ -1,5 +1,7 @@
 package com.goodstudy.domain;
-
+/*
+* 孙向锋
+* */
 public class Kind {
     private int kind_id;
     private String king_name;

@@ -1,5 +1,7 @@
 package com.goodstudy.domain;
-
+/*
+* 刘美琦
+* */
 public class Teacher {
     private int tId;
     private String tName;
