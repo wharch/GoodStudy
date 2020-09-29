@@ -12,11 +12,12 @@ public class Course {
     private String cMaster;//课程缩略图
     private String cInfo;//课程简介
     private double cPrice;//课程价格
+    private int cStatus;//课程状态
 
     public Course() {
     }
 
-    public Course(int cId, String cName, Kind kind, Teacher teacher, String cMaster, String cInfo, double cPrice) {
+    public Course(int cId, String cName, Kind kind, Teacher teacher, String cMaster, String cInfo, double cPrice, int cStatus) {
         this.cId = cId;
         this.cName = cName;
         this.kind = kind;
@@ -24,6 +25,7 @@ public class Course {
         this.cMaster = cMaster;
         this.cInfo = cInfo;
         this.cPrice = cPrice;
+        this.cStatus = cStatus;
     }
 
     public int getcId() {
@@ -82,6 +84,14 @@ public class Course {
         this.cPrice = cPrice;
     }
 
+    public int getcStatus() {
+        return cStatus;
+    }
+
+    public void setcStatus(int cStatus) {
+        this.cStatus = cStatus;
+    }
+
     @Override
     public String toString() {
         return "Course{" +
@@ -92,6 +102,7 @@ public class Course {
                 ", cMaster='" + cMaster + '\'' +
                 ", cInfo='" + cInfo + '\'' +
                 ", cPrice=" + cPrice +
+                ", cStatus=" + cStatus +
                 '}';
     }
 }
