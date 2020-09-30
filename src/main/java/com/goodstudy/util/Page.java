@@ -1,5 +1,6 @@
 package com.goodstudy.util;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 public class Page<T> {
@@ -7,6 +8,7 @@ public class Page<T> {
     private int pageSize;//一页显示多少条数据
     private int totalDate;//一共是多少条数据
     private List<T> data;//显示数据
+    private ResultSet rs;
 
     public Page() {
     }
@@ -14,6 +16,13 @@ public class Page<T> {
     public Page(int currentPage, int pageSize) {
         this.currentPage = currentPage;
         this.pageSize = pageSize;
+    }
+
+    public Page(int currentPage, int pageSize, int totalDate, ResultSet rs) {
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalDate = totalDate;
+        this.rs = rs;
     }
 
     public Page(int currentPage, int pageSize, int totalDate, List<T> data) {
@@ -54,7 +63,16 @@ public class Page<T> {
     public void setData(List<T> date) {
         this.data = date;
     }
-//    获取总页数
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
+    //    获取总页数
     public int totalPageCount(){
         return (totalDate%pageSize)==0?totalDate/pageSize:(totalDate/pageSize)+1;
     }
