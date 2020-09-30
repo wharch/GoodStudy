@@ -4,7 +4,7 @@ package com.goodstudy.domain;
 * */
 
 public class CourseInfo {
-    private int info_id;
+    private int infoId;
     private String video;
     private String note;
     private Section section;
@@ -15,33 +15,38 @@ public class CourseInfo {
     }
     //有参
 
-    public CourseInfo(int info_id, String video, String note, Section section, Course course) {
-        this.info_id = info_id;
+    public CourseInfo(int indoId, String video, String note, Section section, Course course) {
+        this.infoId = indoId;
         this.video = video;
         this.note = note;
         this.section = section;
         this.course = course;
     }
+
+
     //toString方法
 
     @Override
     public String toString() {
-        return "Course_Info{" +
-                "info_id=" + info_id +
+        return "CourseInfo{" +
+                "indoId=" + infoId +
                 ", video='" + video + '\'' +
                 ", note='" + note + '\'' +
                 ", section=" + section +
                 ", course=" + course +
                 '}';
     }
+
+
     //get和set方法
 
-    public int getInfo_id() {
-        return info_id;
+
+    public int getIndoId() {
+        return infoId;
     }
 
-    public void setInfo_id(int info_id) {
-        this.info_id = info_id;
+    public void setIndoId(int indoId) {
+        this.infoId = indoId;
     }
 
     public String getVideo() {

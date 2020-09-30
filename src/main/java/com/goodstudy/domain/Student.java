@@ -4,28 +4,28 @@ package com.goodstudy.domain;
 * 孙向锋
 * */
 public class Student {
-private int stu_id;
-private String stu_name;
-private String stu_gender;
-private String stu_birthday;
-private String stu_username;
-private String stu_pwd;
-private String stu_email;
-private String stu_head_img;
+private int stuId;
+private String stuName;
+private String stuGender;
+private String stuBirthday;
+private String stuUsername;
+private String stuPwd;
+private String stuEmail;
+private String stuHeadImg;
 //空构造
     public Student() {
     }
 //有参构造
 
-    public Student(int stu_id, String stu_name, String stu_gender, String stu_birthday, String stu_username, String stu_pwd, String stu_email, String stu_head_img) {
-        this.stu_id = stu_id;
-        this.stu_name = stu_name;
-        this.stu_gender = stu_gender;
-        this.stu_birthday = stu_birthday;
-        this.stu_username = stu_username;
-        this.stu_pwd = stu_pwd;
-        this.stu_email = stu_email;
-        this.stu_head_img = stu_head_img;
+    public Student(int stuId, String stuName, String stuGender, String stuBirthday, String stuUserName, String stuPwd, String stuEmail, String stuHeadImg) {
+        this.stuId = stuId;
+        this.stuName = stuName;
+        this.stuGender = stuGender;
+        this.stuBirthday = stuBirthday;
+        this.stuUsername = stuUserName;
+        this.stuPwd = stuPwd;
+        this.stuEmail = stuEmail;
+        this.stuHeadImg = stuHeadImg;
     }
 
 
@@ -34,79 +34,81 @@ private String stu_head_img;
     @Override
     public String toString() {
         return "Student{" +
-                "stu_id=" + stu_id +
-                ", stu_name='" + stu_name + '\'' +
-                ", stu_gender='" + stu_gender + '\'' +
-                ", stu_birthday=" + stu_birthday +
-                ", stu_username='" + stu_username + '\'' +
-                ", stu_pwd='" + stu_pwd + '\'' +
-                ", stu_email='" + stu_email + '\'' +
-                ", stu_head_img='" + stu_head_img + '\'' +
+                "stuId=" + stuId +
+                ", stuName='" + stuName + '\'' +
+                ", stuGender='" + stuGender + '\'' +
+                ", stuBirthday='" + stuBirthday + '\'' +
+                ", stuUsername='" + stuUsername + '\'' +
+                ", stuPwd='" + stuPwd + '\'' +
+                ", stuEmail='" + stuEmail + '\'' +
+                ", stuHeadImg='" + stuHeadImg + '\'' +
                 '}';
     }
+
+
 //grt和set方法
 
-    public int getStu_id() {
-        return stu_id;
+    public int getStuId() {
+        return stuId;
     }
 
-    public void setStu_id(int stu_id) {
-        this.stu_id = stu_id;
+    public void setStuId(int stuId) {
+        this.stuId = stuId;
     }
 
-    public String getStu_name() {
-        return stu_name;
+    public String getStuName() {
+        return stuName;
     }
 
-    public void setStu_name(String stu_name) {
-        this.stu_name = stu_name;
+    public void setStuName(String stuName) {
+        this.stuName = stuName;
     }
 
-    public String getStu_gender() {
-        return stu_gender;
+    public String getStuGender() {
+        return stuGender;
     }
 
-    public void setStu_gender(String stu_gender) {
-        this.stu_gender = stu_gender;
+    public void setStuGender(String stuGender) {
+        this.stuGender = stuGender;
     }
 
-    public String getStu_birthday() {
-        return stu_birthday;
+    public String getStuBirthday() {
+        return stuBirthday;
     }
 
-    public void setStu_birthday(String stu_birthday) {
-        this.stu_birthday = stu_birthday;
+    public void setStuBirthday(String stuBirthday) {
+        this.stuBirthday = stuBirthday;
     }
 
-    public String getStu_username() {
-        return stu_username;
+    public String getStuUsername() {
+        return stuUsername;
     }
 
-    public void setStu_username(String stu_username) {
-        this.stu_username = stu_username;
+    public void setStuUserName(String stuUsername) {
+        this.stuUsername = stuUsername;
     }
 
-    public String getStu_pwd() {
-        return stu_pwd;
+    public String getStuPwd() {
+        return stuPwd;
     }
 
-    public void setStu_pwd(String stu_pwd) {
-        this.stu_pwd = stu_pwd;
+    public void setStuPwd(String stuPwd) {
+        this.stuPwd = stuPwd;
     }
 
-    public String getStu_email() {
-        return stu_email;
+    public String getStuEmail() {
+        return stuEmail;
     }
 
-    public void setStu_email(String stu_email) {
-        this.stu_email = stu_email;
+    public void setStuEmail(String stuEmail) {
+        this.stuEmail = stuEmail;
     }
 
-    public String getStu_head_img() {
-        return stu_head_img;
+    public String getStuHeadImg() {
+        return stuHeadImg;
     }
 
-    public void setStu_head_img(String stu_head_img) {
-        this.stu_head_img = stu_head_img;
+    public void setStuHeadImg(String stuHeadImg) {
+        this.stuHeadImg = stuHeadImg;
     }
 }
