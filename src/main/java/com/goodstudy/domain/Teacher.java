@@ -14,11 +14,12 @@ public class Teacher {
     private String tHeadImg;
     private int role;
     private int tState;
-
+    private String certificate;
+    private String certificateImg;
     public Teacher() {
     }
 
-    public Teacher(int tId, String tName, String tGender, String hiredate, String tPhone, String tInfo, String tUsername, String tPwd, String tHeadImg, int role, int tState) {
+    public Teacher(int tId, String tName, String tGender, String hiredate, String tPhone, String tInfo, String tUsername, String tPwd, String tHeadImg, int role, int tState, String certificate, String certificateImg) {
         this.tId = tId;
         this.tName = tName;
         this.tGender = tGender;
@@ -30,6 +31,8 @@ public class Teacher {
         this.tHeadImg = tHeadImg;
         this.role = role;
         this.tState = tState;
+        this.certificate = certificate;
+        this.certificateImg = certificateImg;
     }
 
     public int gettId() {
@@ -120,6 +123,22 @@ public class Teacher {
         this.tState = tState;
     }
 
+    public String getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(String certificate) {
+        this.certificate = certificate;
+    }
+
+    public String getCertificateImg() {
+        return certificateImg;
+    }
+
+    public void setCertificateImg(String certificateImg) {
+        this.certificateImg = certificateImg;
+    }
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -134,6 +153,8 @@ public class Teacher {
                 ", tHeadImg='" + tHeadImg + '\'' +
                 ", role=" + role +
                 ", tState=" + tState +
+                ", certificate='" + certificate + '\'' +
+                ", certificateImg='" + certificateImg + '\'' +
                 '}';
     }
 }
