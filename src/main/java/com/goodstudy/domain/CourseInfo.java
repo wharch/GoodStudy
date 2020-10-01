@@ -1,7 +1,7 @@
 package com.goodstudy.domain;
 /*
-* 孙向锋
-* */
+ * 孙向锋
+ * */
 
 public class CourseInfo {
     private int infoId;
@@ -9,18 +9,22 @@ public class CourseInfo {
     private String note;
     private Section section;
     private Course course;
-    //无参
+    private int infoState;
 
+    //无参
     public CourseInfo() {
     }
+
+
     //有参
 
-    public CourseInfo(int indoId, String video, String note, Section section, Course course) {
-        this.infoId = indoId;
+    public CourseInfo(int infoId, String video, String note, Section section, Course course, int infoState) {
+        this.infoId = infoId;
         this.video = video;
         this.note = note;
         this.section = section;
         this.course = course;
+        this.infoState = infoState;
     }
 
 
@@ -29,11 +33,12 @@ public class CourseInfo {
     @Override
     public String toString() {
         return "CourseInfo{" +
-                "indoId=" + infoId +
+                "infoId=" + infoId +
                 ", video='" + video + '\'' +
                 ", note='" + note + '\'' +
                 ", section=" + section +
                 ", course=" + course +
+                ", infoState=" + infoState +
                 '}';
     }
 
@@ -41,12 +46,12 @@ public class CourseInfo {
     //get和set方法
 
 
-    public int getIndoId() {
+    public int getInfoId() {
         return infoId;
     }
 
-    public void setIndoId(int indoId) {
-        this.infoId = indoId;
+    public void setInfoId(int infoId) {
+        this.infoId = infoId;
     }
 
     public String getVideo() {
@@ -79,5 +84,13 @@ public class CourseInfo {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public int getInfoState() {
+        return infoState;
+    }
+
+    public void setInfoState(int infoState) {
+        this.infoState = infoState;
     }
 }
