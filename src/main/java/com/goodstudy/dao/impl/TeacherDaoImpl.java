@@ -72,7 +72,7 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public Teacher selectTeacherByUnameAndPwd(String tUsername, String tPwd) {
-        String sql = "select * from teacher where t_username = ? and t_pwd = ? and t_state = 1";
+        String sql = "select * from teacher where t_username = ? and t_pwd = ? ";
         ResultSet rs = DBUtil.doQuery(sql, tUsername, tPwd);
         Teacher teacher = null;
         try {
@@ -104,7 +104,7 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public Teacher selectTeacherByPhoneAndPwd(String tPhone, String tPwd) {
-        String sql = "select * from teacher where t_phone = ? and t_pwd = ? and t_state = 1";
+        String sql = "select * from teacher where t_phone = ? and t_pwd = ? ";
         ResultSet rs = DBUtil.doQuery(sql, tPhone, tPwd);
         Teacher teacher = null;
         try {
