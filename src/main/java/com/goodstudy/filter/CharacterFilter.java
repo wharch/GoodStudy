@@ -1,13 +1,17 @@
 package com.goodstudy.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
-
-public class EncodingFilter implements Filter {
+@WebFilter(filterName = "characterFilter",urlPatterns = "/*",initParams = {
+        @WebInitParam(name = "character",value = "utf-8")
+})
+public class CharacterFilter implements Filter {
     private String character;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-       this.character = filterConfig.getInitParameter("character");
+        this.character = filterConfig.getInitParameter("character");
     }
 
     @Override
@@ -19,5 +23,6 @@ public class EncodingFilter implements Filter {
 
     @Override
     public void destroy() {
+
     }
 }
