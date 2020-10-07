@@ -93,4 +93,27 @@ public class KindDaoImpl implements KindDao {
         }
         return null;
     }
+
+    /**
+     *
+     * 不分页查询所有课程
+     * @return
+     */
+    @Override
+    public List<Kind> selectAllKind() {
+        String sql = "select * from kind";
+        ResultSet rs = DBUtil.doQuery(sql);
+        List<Kind> kinds = new ArrayList<>();
+        try {
+            while (rs.next()){
+                int kindId = rs.getInt("kind_id");
+                String kindName = rs.getString("kind_name");
+                Kind kind = new Kind(kindId,kindName);
+                kinds.add(kind);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return kinds;
+    }
 }

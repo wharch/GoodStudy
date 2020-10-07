@@ -3,6 +3,9 @@ package com.goodstudy.service;
 import com.goodstudy.domain.Kind;
 import com.goodstudy.domain.Student;
 import com.goodstudy.util.Page;
+
+import java.util.List;
+
 /*
  * 孙向锋
  * */
@@ -18,4 +21,6 @@ public interface KindService {
     //根据课程名称查找
     //分页查询
     Page<Kind> findByPage(int currentPage, int pageSize);
+    //不分页查询所有的分类
+    List<Kind> findAllKind();
 }

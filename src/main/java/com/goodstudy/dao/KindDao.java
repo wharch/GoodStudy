@@ -3,6 +3,8 @@ package com.goodstudy.dao;
 import com.goodstudy.domain.Kind;
 import com.goodstudy.util.Page;
 
+import java.util.List;
+
 /*课程类别Dao
  * 孙向锋
  * */
@@ -17,5 +19,7 @@ public interface KindDao {
     Page<Kind>selectAll(int currentPage,int pageSize);
     //根据课程名称查询对应的课程信息
     Kind selectByName(String kindName);
+    //不分页查询所有课程
+    List<Kind> selectAllKind();
 
 }

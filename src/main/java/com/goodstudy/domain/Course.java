@@ -17,6 +17,10 @@ public class Course {
     public Course() {
     }
 
+    public Course(int cId) {
+        this.cId = cId;
+    }
+
     public Course(int cId, String cName, Kind kind, Teacher teacher, String cMaster, String cInfo, double cPrice, int cStatus) {
         this.cId = cId;
         this.cName = cName;

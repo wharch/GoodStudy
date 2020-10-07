@@ -165,6 +165,43 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     /**
+     * 根据教师编号分页查询课程列表
+     * @param currentPage 当前页
+     * @param pageSize 每页显示的数量
+     * @param tId 教师编号
+     * @return
+     */
+    @Override
+    public Page<Course> findCourseByTIdByPage(int currentPage, int pageSize, int tId) {
+        String sql = "select c.c_id,c.c_master,c.c_name,c.c_price,c.c_status,c.c_info,t.t_id,t.t_name,t.t_phone,k.kind_id,k.kind_name from course c inner join  kind k ON c.kind_id=k.kind_id left join teacher t ON t.t_id=c.t_id where c.t_id = ?";
+        Page<Course> page = DBUtil.doQueryByPage(sql, currentPage, pageSize, tId);
+        ResultSet rs = page.getRs();
+        List<Course> courses = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int cId = rs.getInt("c_id");
+                String cMaster = rs.getString("c_master");
+                String cName = rs.getString("c_name");
+                double cPrice = rs.getDouble("c_price");
+                int cStatus = rs.getInt("c_status");
+                String cInfo = rs.getString("c_info");
+                String tName = rs.getString("t_name");
+                String tPhone = rs.getString("t_phone");
+                int kindId = rs.getInt("kind_id");
+                String kindName = rs.getString("kind_name");
+                Kind kind = new Kind(kindId, kindName);
+                Teacher teacher = new Teacher(tId, tName, null, null, tPhone, null, null, null, null, 0, 0, null, null);
+                Course course = new Course(cId, cName, kind, teacher, cMaster, cInfo, cPrice, cStatus);
+                courses.add(course);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        page.setData(courses);
+        return page;
+    }
+
+    /**
      * 根据名称查看是否有此课程
      *
      * @param cName 课程名称

@@ -63,6 +63,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
+     * 根据教师编号分页查询课程列表
+     * @param currentPage 当前页
+     * @param pageSize 每页显示的记录数
+     * @param tId 教师编号
+     * @return
+     */
+    @Override
+    public Page<Course> findCourseByTIdByPage(int currentPage, int pageSize, int tId) {
+        return dao.findCourseByTIdByPage(currentPage,pageSize,tId);
+    }
+
+    /**
      * 查看是否有此名称的课程信息
      *
      * @param cName 课程名

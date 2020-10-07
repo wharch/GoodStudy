@@ -22,6 +22,9 @@ public interface CourseService {
     //模糊查询课程
     List<Course> findAllCourseByLike(String key);
 
+    //根据教师编号分页查询课程列表
+    Page<Course> findCourseByTIdByPage(int currentPage,int pageSize,int tId);
+
     //判断是否有此名称的课程
     Course findCrouseByName(String cName);
 

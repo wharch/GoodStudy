@@ -6,6 +6,9 @@ import com.goodstudy.domain.Kind;
 import com.goodstudy.domain.Student;
 import com.goodstudy.service.KindService;
 import com.goodstudy.util.Page;
+
+import java.util.List;
+
 /*
 * 孙向锋
 * kindServiceDao的实现
@@ -65,5 +68,14 @@ public class KindServiceImpl implements KindService {
     @Override
     public Page<Kind> findByPage(int currentPage, int pageSize) {
         return this.kindDao.selectAll(currentPage, pageSize);
+    }
+
+    /**
+     * 不分页查询课程的信息
+     * @return
+     */
+    @Override
+    public List<Kind> findAllKind() {
+        return this.kindDao.selectAllKind();
     }
 }
