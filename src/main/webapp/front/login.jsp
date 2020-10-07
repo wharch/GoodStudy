@@ -6,16 +6,16 @@
     <title>Login</title>
 
     <!-- Stylesheets -->
-    <link href="front/css/bootstrap.css" rel="stylesheet">
-    <link href="front/css/main.css" rel="stylesheet">
-    <link href="front/css/responsive.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <!-- Color Switcher Mockup -->
-    <link href="front/css/color-switcher-design.css" rel="stylesheet">
+    <link href="css/color-switcher-design.css" rel="stylesheet">
     <!-- Color Themes -->
-    <link id="theme-color-file" href="front/css/color-themes/theme-one.css" rel="stylesheet">
+    <link id="theme-color-file" href="css/color-themes/theme-one.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
     <link rel="icon" href="images/favicon.png" type="image/x-icon">
@@ -237,7 +237,7 @@
     <!--End Main Header -->
 
     <!-- Sign Up Section -->
-    <section class="signup-section login-section" style="background-image:url(front/images/background/pattern-4.png)">
+    <section class="signup-section login-section" style="background-image:url(images/background/pattern-4.png)">
         <div class="auto-container">
             <div class="logo">
                 <a href="register.jsp"><img src="images/logo-3.png" alt="" /></a>
@@ -404,18 +404,18 @@
 </div>
 
 
-<script src="front/js/jquery.js"></script>
-<script src="front/js/popper.min.js"></script>
-<script src="front/js/bootstrap.min.js"></script>
-<script src="front/js/jquery.fancybox.js"></script>
-<script src="front/js/appear.js"></script>
-<script src="front/js/isotope.js"></script>
-<script src="front/js/owl.js"></script>
-<script src="front/js/wow.js"></script>
-<script src="front/js/jquery.countdown.js"></script>
-<script src="front/js/jquery-ui.js"></script>
-<script src="front/js/script.js"></script>
-<script src="front/js/color-settings.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.fancybox.js"></script>
+<script src="js/appear.js"></script>
+<script src="js/isotope.js"></script>
+<script src="js/owl.js"></script>
+<script src="js/wow.js"></script>
+<script src="js/jquery.countdown.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/script.js"></script>
+<script src="js/color-settings.js"></script>
 
 </body>
 </html>
