@@ -1,18 +1,19 @@
 package com.goodstudy.domain;
 
 /*
-* 孙向锋
-* */
+ * 孙向锋
+ * */
 public class Student {
-private int stuId;
-private String stuName;
-private String stuGender;
-private String stuBirthday;
-private String stuUsername;
-private String stuPwd;
-private String stuEmail;
-private String stuHeadImg;
-//空构造
+    private int stuId;
+    private String stuName;
+    private String stuGender;
+    private String stuBirthday;
+    private String stuUsername;
+    private String stuPwd;
+    private String stuEmail;
+    private String stuHeadImg;
+
+    //空构造
     public Student() {
     }
 //有参构造
@@ -28,8 +29,17 @@ private String stuHeadImg;
         this.stuHeadImg = stuHeadImg;
     }
 
+    public Student(String stuName, String stuGender, String stuBirthday, String stuUsername, String stuPwd, String stuEmail, String stuHeadImg) {
+        this.stuName = stuName;
+        this.stuGender = stuGender;
+        this.stuBirthday = stuBirthday;
+        this.stuUsername = stuUsername;
+        this.stuPwd = stuPwd;
+        this.stuEmail = stuEmail;
+        this.stuHeadImg = stuHeadImg;
+    }
 
-//toString方法
+    //toString方法
 
     @Override
     public String toString() {
@@ -111,4 +121,5 @@ private String stuHeadImg;
     public void setStuHeadImg(String stuHeadImg) {
         this.stuHeadImg = stuHeadImg;
     }
+
 }
