@@ -74,5 +74,15 @@ CourseInfoDao courseInfoDao = new CourseInfoDaoImpl();
         return this.findByPage(currentPage,pageSize);
     }
 
+    @Override
+    public Page<CourseInfo> findCrouseInfoByStateAndPage(int infoState, int currentPage, int pageSize) {
+        return courseInfoDao.findCrouseInfoByStateAndPage(infoState, currentPage, pageSize);
+    }
+
+    @Override
+    public boolean updateCourseInfoStateById(CourseInfo courseInfo) {
+        return courseInfoDao.updateCourseInfoStateById(courseInfo);
+    }
+
 
 }

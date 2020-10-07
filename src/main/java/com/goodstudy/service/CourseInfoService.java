@@ -20,4 +20,8 @@ public interface CourseInfoService {
     List<CourseInfo> findAllCourseInfo();
     //分页查询操作
     Page<CourseInfo> findByPage(int currentPage,int pageSize);
+    //分页查询操作
+    Page<CourseInfo> findCrouseInfoByStateAndPage(int infoState,int currentPage,int pageSize);
+    //通过编号修改课程状态
+    boolean updateCourseInfoStateById(CourseInfo courseInfo);
 }

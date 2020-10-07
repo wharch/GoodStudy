@@ -7,6 +7,7 @@ public class CourseInfo {
     private int infoId;
     private String video;
     private String note;
+    private String knobbleName;
     private Section section;
     private Course course;
     private int infoState;
@@ -27,6 +28,15 @@ public class CourseInfo {
         this.infoState = infoState;
     }
 
+    public CourseInfo(int infoId, String video, String note, String knobbleName, Section section, Course course, int infoState) {
+        this.infoId = infoId;
+        this.video = video;
+        this.note = note;
+        this.knobbleName = knobbleName;
+        this.section = section;
+        this.course = course;
+        this.infoState = infoState;
+    }
 
     //toString方法
 
@@ -36,12 +46,12 @@ public class CourseInfo {
                 "infoId=" + infoId +
                 ", video='" + video + '\'' +
                 ", note='" + note + '\'' +
+                ", knobbleName='" + knobbleName + '\'' +
                 ", section=" + section +
                 ", course=" + course +
                 ", infoState=" + infoState +
                 '}';
     }
-
 
     //get和set方法
 
@@ -92,5 +102,13 @@ public class CourseInfo {
 
     public void setInfoState(int infoState) {
         this.infoState = infoState;
+    }
+
+    public String getKnobbleName() {
+        return knobbleName;
+    }
+
+    public void setKnobbleName(String knobbleName) {
+        this.knobbleName = knobbleName;
     }
 }
