@@ -17,8 +17,8 @@ public interface StudentService {
     boolean changeStudent(Student student);
     //删除学生
     boolean removeStudent(int stuId);
-    //根据学生姓名查询学生信息
-    Student findByName(String stuName);
+    //根据用户名密码查询学生信息
+    Student findByNameAndPassword(String stuName,String password);
     //分页查询
     Page<Student> findByPage(int currentPage, int pageSize);
     //模糊查询课程

@@ -24,8 +24,8 @@ public class StudentDaoImpl implements StudentDao {
     @Override
     public boolean insertStudent(Student student) {
         //执行sql语句并且获取里面？的值
-        int i = DBUtil.doUpdate("insert into student(stu_id,stu_name,stu_gender,stu_birthday,stu_username,stu_pwd,stu_email,stu_head_img) values(?,?,?,?,?,?,?,?)",
-                student.getStuId(),student.getStuName(),student.getStuGender(),student.getStuBirthday(),student.getStuUsername(),student.getStuPwd(),student.getStuEmail(),student.getStuHeadImg());
+        int i = DBUtil.doUpdate("insert into student(stu_name,stu_gender,stu_birthday,stu_username,stu_pwd,stu_email,stu_head_img) values(?,?,?,?,?,?,?)",
+                student.getStuName(),student.getStuGender(),student.getStuBirthday(),student.getStuUsername(),student.getStuPwd(),student.getStuEmail(),student.getStuHeadImg());
         //返回i
         return i>0?true:false;
     }
@@ -137,12 +137,35 @@ public class StudentDaoImpl implements StudentDao {
         return null;
     }
     /**
-     * 根据姓名查询学生信息
+     * 根据用户名密码查询学生信息
+     * Student 学生对象
+     */
+    @Override
+    public Student selectByNameAndPassword(String stuName,String password) {
+        ResultSet rs = DBUtil.doQuery("select * from student where stu_username=? and stu_pwd=?",stuName,password);
+        try {
+            if (rs.next()) {
+                return new Student(rs.getInt("stu_id"),
+                        rs.getString("stu_name"),
+                        rs.getString("stu_gender"),
+                        rs.getString("stu_birthday"),
+                        rs.getString("stu_username"),
+                        rs.getString("stu_pwd"),
+                        rs.getString("stu_email"),
+                        rs.getString("stu_head_img"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+    /**
+     * 根据学生姓名查询学生信息
      * Student 学生对象
      */
     @Override
     public Student selectByName(String stuName) {
-        ResultSet rs = DBUtil.doQuery("select * from student where stu_name=?",stuName);
+        ResultSet rs = DBUtil.doQuery("select * from student where stu_username=?",stuName);
         try {
             if (rs.next()) {
                 return new Student(rs.getInt("stu_id"),

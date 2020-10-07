@@ -24,12 +24,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public boolean addStudent(Student student) {
         //判断当前录入的员工信息是否已经存在
-        Student studentByName = studentDao.selectByName(student.getStuName());
-        if(studentByName != null){
-            return false;
-        }else{
-            return studentDao.insertStudent(student);
-        }
+//        Student studentByName = studentDao.selectByName(student.getStuName());
+//        if(studentByName != null){
+//            return false;
+//        }else{
+//            return studentDao.insertStudent(student);
+//        }
+        return studentDao.insertStudent(student);
 
     }
     /**
@@ -51,13 +52,13 @@ public class StudentServiceImpl implements StudentService {
         return this.studentDao.deleteStudent(stuId);
     }
     /**
-     * 根据学生姓名查询信息
+     * 根据用户名密码查询信息
      * @param stuName
      * @return
      */
     @Override
-    public Student findByName(String stuName) {
-        return studentDao.selectByName(stuName);
+    public Student findByNameAndPassword(String stuName,String password) {
+        return studentDao.selectByNameAndPassword(stuName,password);
     }
     /**
      * 分页查询全部的学生信息
@@ -79,4 +80,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> findAllStudentByLike(String key) {
         return studentDao.findAllStudentByLike(key);
     }
+
+
 }

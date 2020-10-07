@@ -24,6 +24,8 @@ public interface StudentDao {
     List<Student> findAllStudentByLike(String key);
     //查询全部学生
     List<Student>findAllStudent();
+    //根据用户名 密码查询学生信息
+    Student selectByNameAndPassword(String stuName,String password);
     //根据学生姓名查询学生信息
     Student selectByName(String stuName);
 }
