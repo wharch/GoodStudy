@@ -74,14 +74,36 @@ CourseInfoDao courseInfoDao = new CourseInfoDaoImpl();
         return this.findByPage(currentPage,pageSize);
     }
 
+    /**
+     * 根据课程状态分页查询课程详情列表
+     * @param infoState
+     * @param currentPage
+     * @param pageSize
+     * @return
+     */
     @Override
     public Page<CourseInfo> findCrouseInfoByStateAndPage(int infoState, int currentPage, int pageSize) {
         return courseInfoDao.findCrouseInfoByStateAndPage(infoState, currentPage, pageSize);
     }
 
+    /**
+     * 根据课程编号修改课程状态
+     * @param courseInfo
+     * @return
+     */
     @Override
     public boolean updateCourseInfoStateById(CourseInfo courseInfo) {
         return courseInfoDao.updateCourseInfoStateById(courseInfo);
+    }
+
+    /**
+     *根据章节编号查询课程详情列表
+     * @param sId
+     * @return
+     */
+    @Override
+    public List<CourseInfo> selectBysId(int sId) {
+        return null;
     }
 
 

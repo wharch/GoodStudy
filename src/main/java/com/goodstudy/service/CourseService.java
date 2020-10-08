@@ -25,6 +25,12 @@ public interface CourseService {
     //根据教师编号分页查询课程列表
     Page<Course> findCourseByTIdByPage(int currentPage,int pageSize,int tId);
 
+    //根据类别编号查看课程
+    List<Course> findCourseByKind(int kindId);
+
+    //根据课程编号查看的课程
+    Course findCrouseById(int cId);
+
     //判断是否有此名称的课程
     Course findCrouseByName(String cName);
 

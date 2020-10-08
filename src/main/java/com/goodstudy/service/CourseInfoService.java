@@ -24,4 +24,6 @@ public interface CourseInfoService {
     Page<CourseInfo> findCrouseInfoByStateAndPage(int infoState,int currentPage,int pageSize);
     //通过编号修改课程状态
     boolean updateCourseInfoStateById(CourseInfo courseInfo);
+    //按照章节编号查询该课程所有状态
+    List<CourseInfo> selectBysId(int sId);
 }

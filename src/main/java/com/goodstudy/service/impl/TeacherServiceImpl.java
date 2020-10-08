@@ -100,9 +100,24 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherDao.selectTeacherByPhoneAndPwd(tPhone,tPwd);
     }
 
+    /**
+     * 根据手机号查询教师对象
+     * @param tPhone
+     * @return
+     */
     @Override
     public Teacher selectTeacherByPhone(String tPhone) {
         return teacherDao.selectTeacherByPhone(tPhone);
+    }
+
+    /**
+     * 根据教师编号查询教师记录
+     * @param tId
+     * @return
+     */
+    @Override
+    public Teacher selectTeacherByTId(int tId) {
+        return teacherDao.selectTeacherByTId(tId);
     }
 
     /**

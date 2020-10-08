@@ -61,6 +61,12 @@ public interface TeacherService {
     Teacher selectTeacherByPhone(String tPhone);
 
     /**
+     * 根据教师编号查询教师记录
+     * @param tId
+     * @return
+     */
+    Teacher selectTeacherByTId(int tId);
+    /**
      * 教师登录（可以根据手机号和教师编号登录）
      * @param account
      * @param password

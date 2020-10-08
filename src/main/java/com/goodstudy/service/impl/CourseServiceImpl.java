@@ -75,6 +75,26 @@ public class CourseServiceImpl implements CourseService {
     }
 
     /**
+     * 根据类别编号不分页查询课程列表
+     * @param kindId
+     * @return
+     */
+    @Override
+    public List<Course> findCourseByKind(int kindId) {
+        return dao.findCourseByKind(kindId);
+    }
+
+    /**
+     * 根据课程编号查询课程对象
+     * @param cId
+     * @return
+     */
+    @Override
+    public Course findCrouseById(int cId) {
+        return dao.findCrouseById(cId);
+    }
+
+    /**
      * 查看是否有此名称的课程信息
      *
      * @param cName 课程名
@@ -138,4 +158,5 @@ public class CourseServiceImpl implements CourseService {
     public boolean delCourse(int cId) {
         return dao.delCourse(cId);
     }
+
 }
