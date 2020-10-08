@@ -1,10 +1,14 @@
 package com.goodstudy.controller;
 
-import com.goodstudy.domain.Course;
-import com.goodstudy.domain.Kind;
-import com.goodstudy.domain.Teacher;
+import com.goodstudy.domain.*;
+import com.goodstudy.service.CourseInfoService;
 import com.goodstudy.service.CourseService;
+import com.goodstudy.service.KindService;
+import com.goodstudy.service.SectionService;
+import com.goodstudy.service.impl.CourseInfoServiceImpl;
 import com.goodstudy.service.impl.CourseServiceImpl;
+import com.goodstudy.service.impl.KindServiceImpl;
+import com.goodstudy.service.impl.SectionServiceImpl;
 import com.goodstudy.util.Page;
 import com.goodstudy.util.RandomUtil;
 import javax.servlet.ServletException;
@@ -15,15 +19,21 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "courseServlet",urlPatterns = "/course")
 @MultipartConfig
 public class CourseServlet extends HttpServlet {
     private CourseService courseService;
-
+    private KindService kindService;
+    private SectionService sectionService;
+    private CourseInfoService courseInfoService;
     public CourseServlet() {
         this.courseService = new CourseServiceImpl();
+        this.kindService = new KindServiceImpl();
+        this.sectionService = new SectionServiceImpl();
+        this.courseInfoService = new CourseInfoServiceImpl();
     }
 
     @Override
@@ -35,12 +45,73 @@ public class CourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String op = req.getParameter("op");
         if("add".equals(op)){
+            //lmq
             this.doAdd(req,resp);
         }else if("findAllByPage".equals(op)){
+            //lmq
             this.doFindAllByPage(req,resp);
         }else if("delete".equals(op)){
+            //lmq
             this.doDown(req,resp);
+        }else if("findByName".equals(op)){
+            //lmq
+            this.doFindByName(req,resp);
+        }else if ("pageFindAllCourse".equals(op)){
+            pageFindAllCourse(req,resp);
+        }else if ("showCourse".equals(op)){
+            showCourse(req,resp);
         }
+    }
+
+    /**
+     * 前端课程详情的展示
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void showCourse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String cId = req.getParameter("cId");
+        List<List<CourseInfo>> lci = new ArrayList<>();
+        Course course = courseService.findCrouseById(Integer.valueOf(cId));
+        req.setAttribute("course",course);
+        List<Section> sections = sectionService.findAllSection(Integer.valueOf(cId));
+        req.setAttribute("sections",sections);
+        for (Section section : sections) {
+            List<CourseInfo> courseInfos = courseInfoService.selectBysId(section.getSectionId());
+            lci.add(courseInfos);
+        }
+        req.setAttribute("lci",lci);
+        req.getRequestDispatcher("/front/courseDetail.jsp").forward(req,resp);
+
+
+    }
+
+    /**
+     * 分页模糊查询所有的课程
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    private void pageFindAllCourse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String pageNum = req.getParameter("pageNum");
+        String key = req.getParameter("key");
+        Page<Course> courses = courseService.findAllCourseByPageLike(pageNum == null ? 1 : Integer.valueOf(pageNum), 8, key == null ? "" : key);
+        req.setAttribute("courses",courses);
+        req.setAttribute("cn",key);
+        req.getRequestDispatcher("/front/courseList.jsp").forward(req,resp);
+    }
+    /**
+     * 根据课程名查询课程信息
+     * @param req
+     * @param resp
+     */
+    private void doFindByName(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String cName = req.getParameter("cName");
+        Course crouseByName = courseService.findCrouseByName(cName);
+        req.setAttribute("courseByName",crouseByName);
+        req.getRequestDispatcher("/back/section-add.jsp").forward(req,resp);
     }
 
     /**
@@ -48,8 +119,18 @@ public class CourseServlet extends HttpServlet {
      * @param req
      * @param resp
      */
-    private void doDown(HttpServletRequest req, HttpServletResponse resp) {
+    private void doDown(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String cId = req.getParameter("cId");
+        boolean b = courseService.delCourse(Integer.parseInt(cId));
+        if(b){
+            PrintWriter out = resp.getWriter();
+            out.write("yes");
+            out.flush();
+        }else{
+            PrintWriter out = resp.getWriter();
+            out.write("no");
+            out.flush();
+        }
     }
 
     /**
