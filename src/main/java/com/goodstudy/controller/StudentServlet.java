@@ -32,7 +32,7 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+       this.doPost(req, resp);
     }
 
     /*
@@ -42,7 +42,6 @@ public class StudentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
 
         try {
-            req.setCharacterEncoding("utf-8");//设置编码方式
             String op = req.getParameter("op");//获取op参数值
             //判断op参数要干什么 ?
             if ("login".equals(op)){
@@ -76,9 +75,7 @@ public class StudentServlet extends HttpServlet {
     * */
     private void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String userName = req.getParameter("username");
-        System.out.println(userName);
         String password = req.getParameter("pwd");
-        System.out.println(password);
         Student student = this.studentService.findByNameAndPassword(userName,password);
         if (student  == null){
             req.setAttribute("message","对不起，登陆失败，请重新登陆");
@@ -86,12 +83,7 @@ public class StudentServlet extends HttpServlet {
         }else{
             //将用户信息存储到session中
             HttpSession session = req.getSession();
-            session.setAttribute("admin",student );
-            //下面四行仅是测试 解除会空指针 servlet上下文是优先运行 是一个全局的储存信息空间 getAttribute为空  无法转int 故为空
-            //只要是登陆成功就证明有人登陆了 我们就需要把登陆的人数记录到全局变量servlet对象中
-//            int num = (int) this.getServletContext().getAttribute("num");
-            //将数值+1 再存储到全局变量中
-//            this.getServletContext().setAttribute("num",num+1);
+            session.setAttribute("admin",student);
             //重定向到某某文件
             resp.sendRedirect("back/admin-index.jsp");
 
@@ -102,18 +94,12 @@ public class StudentServlet extends HttpServlet {
     * */
     protected void addStudent(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
         //接收用户传递过来的用户信息
-        String stu_name = req.getParameter("name");
-        System.out.println(stu_name);
-        String stu_gender = req.getParameter("gender");
-        System.out.println(stu_gender);
-        String stu_birthday = req.getParameter("birthday");
-        System.out.println(stu_birthday);
-        String stu_username = req.getParameter("username");
-        System.out.println(stu_username);
-        String stu_pwd = req.getParameter("pwd");
-        System.out.println(stu_pwd);
-        String stu_email = req.getParameter("email");
-        System.out.println(stu_email);
+        String stuName = req.getParameter("name");
+        String stuGender = req.getParameter("gender");
+        String stuBirthday = req.getParameter("birthday");
+        String stuUsername = req.getParameter("username");
+        String stuPwd = req.getParameter("pwd");
+        String stuEmail = req.getParameter("email");
         //获取图片part对象
         Part part = req.getPart("stu_head_img");
         //获取提交图片名称
@@ -138,20 +124,17 @@ public class StudentServlet extends HttpServlet {
 //        System.out.println(f.getAbsoluteFile());
         //调用添加学生信息的方法
         boolean info = this.studentService.addStudent(new Student(
-                stu_name,
-                stu_gender,
-                stu_birthday,
-                stu_username,
-                stu_pwd,
-                stu_email,
+                stuName,
+                stuGender,
+                stuBirthday,
+                stuUsername,
+                stuPwd,
+                stuEmail,
                 newName
 
         ));
-
-        System.out.println(info);
-
 //        利用请求转发跳转界面 绝对路径
-        req.getRequestDispatcher("index.jsp").forward(req,resp);
+        req.getRequestDispatcher("front/login.jsp").forward(req,resp);
     }
 
 }
