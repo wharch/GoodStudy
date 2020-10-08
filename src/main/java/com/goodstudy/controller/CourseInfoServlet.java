@@ -93,11 +93,17 @@ public class CourseInfoServlet extends HttpServlet {
             }
             note.write(path + newNoteName);
         }
-        CourseInfo courseInfo = new CourseInfo(0, newVideoName, newNoteName,knobbleName,new Section(1, null, null), new Course(1), 0);
+        //获取当前的课程id
+        String cId = req.getParameter("cId").trim();
+        //获取当前的章节id
+        String sectionId = req.getParameter("sId");
+        CourseInfo courseInfo = new CourseInfo(0, newVideoName, newNoteName,knobbleName,new Section(Integer.valueOf(sectionId.trim()), null, null), new Course(Integer.valueOf(cId)), 0);
         if (service.addCourseInfo(courseInfo)){
-            System.out.println("添加成功");
+            req.setAttribute("addCourseMsg","yes");
+            req.getRequestDispatcher("/section?op=findByCId&pageNum=1&cId="+cId).forward(req,resp);
         }else {
-            System.out.println("添加失败");
+            req.setAttribute("addCourseMsg","no");
+            req.getRequestDispatcher("/section?op=findByCId&pageNum=1&cId="+cId).forward(req,resp);
         }
 
     }

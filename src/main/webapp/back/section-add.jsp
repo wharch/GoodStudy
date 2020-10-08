@@ -1,16 +1,15 @@
-<%@ page import="java.util.List" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2020/10/6
-  Time: 9:43
+  Date: 2020/10/7
+  Time: 20:21
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>添加课程</title>
+    <title>添加章节</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
@@ -38,50 +37,29 @@
     <div class="page-content">
         <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-            <form class="layui-form" action="<%=application.getContextPath()%>/course?op=add" method="post" enctype="multipart/form-data">
+            <form class="layui-form" action="<%=application.getContextPath()%>/section?op=add" method="post">
+                <div class="layui-form-item">
+                    <label for="cId" class="layui-form-label">
+                        <span class="x-red">*</span>课程编号
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="cId" name="cId" required=""  autocomplete="off" class="layui-input" readonly="readonly" value="${requestScope.courseByName.cId}">
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <label for="cName" class="layui-form-label">
                         <span class="x-red">*</span>课程名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="cName" name="cName" required=""  autocomplete="off" class="layui-input">
+                        <input type="text" id="cName" name="cName" required=""  autocomplete="off" class="layui-input" readonly="readonly" value="${requestScope.courseByName.cName}">
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="kindId" class="layui-form-label">
-                        <span class="x-red">*</span>课程类别
-                    </label>
-                    <div class="layui-input-inline" id="kind">
-                        <select name="kindId" id="kindId">
-                            <option>请选择课程</option>
-                            <c:forEach items="${requestScope.allKind}" var="kind">
-                                <option value="${kind.kindId}">${kind.kindName}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="cMaster" class="layui-form-label">
-                        <span class="x-red">*</span>展示缩略图
+                    <label for="sectionName" class="layui-form-label">
+                        <span class="x-red">*</span>章节名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="file" name="cMaster" id="cMaster" multiple><br/>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="cInfo" class="layui-form-label">
-                        <span class="x-red">*</span>课程简介
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="cInfo" name="cInfo" required=""  autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label for="cPrice" class="layui-form-label">
-                        <span class="x-red">*</span>课程价格
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="cPrice" name="cPrice" required=""  autocomplete="off" class="layui-input">
+                        <input type="text" id="sectionName" name="sectionName" required=""  autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

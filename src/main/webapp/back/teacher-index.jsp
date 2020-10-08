@@ -20,14 +20,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
     <script src="<%=application.getContextPath()%>/back/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="<%=application.getContextPath()%>/back/js/xadmin.js"></script>
-    <%--<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />--%>
-    <%--<link rel="stylesheet" href="<%=application.getContextPath()%>/back/css/font.css">--%>
-    <%--<link rel="stylesheet" href="<%=application.getContextPath()%>/back/css/xadmin.css">--%>
-    <%--<link rel="stylesheet" href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css">--%>
-    <%--<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>--%>
-    <%--<script type="text/javascript" src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>--%>
-    <%--<script src="<%=application.getContextPath()%>/back/lib/layui/layui.js" charset="utf-8"></script>--%>
-    <%--<script type="text/javascript" src="<%=application.getContextPath()%>/back/js/xadmin.js"></script>--%>
     <script type="text/javascript">
         $(function(){
             if(${sessionScope.teacherLogin == null}){
@@ -49,6 +41,7 @@
             </a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="#"></a></dd>
+                <dd><a href="<%=application.getContextPath()%>/teacher?op=findByTId">个人中心</a></dd>
                 <dd><a href="<%=application.getContextPath()%>/teacher?op=logout&user=teacher">切换帐号</a></dd>
                 <dd><a href="<%=application.getContextPath()%>/teacher?op=logout&user=teacher">退出</a></dd>
             </dl>

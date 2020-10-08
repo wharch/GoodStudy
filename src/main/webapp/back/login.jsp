@@ -25,6 +25,9 @@
             if(${requestScope.msg != null && requestScope.msg != ""}){
                  alert('${requestScope.msg}');
             }
+            if(${requestScope.teacherRegisterMsg == 'yes'}){
+                alert("注册成功，请登录！");
+            }
         })
     </script>
 </head>
