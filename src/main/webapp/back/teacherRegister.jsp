@@ -13,7 +13,11 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <script src="<%=application.getContextPath()%>/back/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="<%=application.getContextPath()%>/back/js/xadmin.js"></script>
-
+    <script type="text/javascript">
+        if(${requestScope.teacherRegisterMsg == 'no'}){
+            alert("注册失败，请重新注册！");
+        }
+    </script>
 </head>
 <body>
 <div class="login-logo"><h1>教师注册</h1></div>
