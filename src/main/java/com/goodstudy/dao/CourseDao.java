@@ -28,8 +28,14 @@ public interface CourseDao {
     //判断是否有此名称的课程
     Course findCrouseByName(String cName);
 
+    //根据课程编号查看的课程
+    Course findCrouseById(int cId);
+
     //根据类别编号查看课程
     Page<Course> findAllCourseByKind(int currentPage, int pageSize, int kindId);
+
+    //根据类别编号查看课程
+    List<Course> findCourseByKind(int kindId);
 
     //添加课程
     boolean addCourse(Course course);

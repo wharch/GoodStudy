@@ -102,6 +102,34 @@ public class CourseInfoDaoImpl implements CourseInfoDao {
     }
 
     /**
+     * 根据章节编号不分页查询课程详情列表
+     * @param sId
+     * @return
+     */
+    @Override
+    public List<CourseInfo> selectBysId(int sId) {
+        String sql = "select * from course_info where section_id = ?";
+        ResultSet rs = DBUtil.doQuery(sql, sId);
+        List<CourseInfo> courseInfos = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int infoId = rs.getInt("info_id");
+                String video = rs.getString("video");
+                String note = rs.getString("note");
+                String knobbleName = rs.getString("knobble_name");
+                int cId = rs.getInt("c_id");
+                int infoState = rs.getInt("info_state");
+                CourseInfo courseInfo = new CourseInfo(infoId,video,note,knobbleName,new Section(sId,null,null),null,infoState);
+                courseInfos.add(courseInfo);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return courseInfos;
+    }
+
+    /**
      * 添加课程详情
      *
      * @param courseInfo 课程详情对象

@@ -162,6 +162,38 @@ public class TeacherDaoImpl implements TeacherDao {
     }
 
     /**
+     * 根据教师编号查询教师对象
+     * @param tId
+     * @return
+     */
+    @Override
+    public Teacher selectTeacherByTId(int tId) {
+        String sql = "select * from teacher where t_id = ?";
+        ResultSet rs = DBUtil.doQuery(sql, tId);
+        Teacher teacher = null;
+        try {
+            if(rs.next()){
+                String tName = rs.getString("t_name");
+                String tGender = rs.getString("t_gender");
+                String hiredate = rs.getString("hiredate");
+                String tPhone = rs.getString("t_phone");
+                String tInfo = rs.getString("t_info");
+                String tUsername = rs.getString("t_username");
+                String tPwd = rs.getString("t_pwd");
+                String tHeadImg = rs.getString("t_head_img");
+                int role = rs.getInt("role");
+                int tState = rs.getInt("t_state");
+                String certificate = rs.getString("certificate");
+                String certificateImg = rs.getString("certificate_img");
+                teacher = new Teacher(tId,tName,tGender,hiredate,tPhone,tInfo,tUsername,tPwd,tHeadImg,role,tState,certificate,certificateImg);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return teacher;
+    }
+
+    /**
      * 分页查询所有教师
      * @return
      *

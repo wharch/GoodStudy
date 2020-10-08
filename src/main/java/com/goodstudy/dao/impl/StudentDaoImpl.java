@@ -94,7 +94,7 @@ public class StudentDaoImpl implements StudentDao {
         List<Student> students = new ArrayList<Student>();
         try {
             while (rs.next()) {
-                students.add(new Student(
+                 students.add(new Student(
                         rs.getInt("stu_id"),
                         rs.getString("stu_name"),
                         rs.getString("stu_gender"),
@@ -107,7 +107,7 @@ public class StudentDaoImpl implements StudentDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return students;
     }
     /**
      * 根据学生名模糊查询全部信息
@@ -134,7 +134,7 @@ public class StudentDaoImpl implements StudentDao {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return students;
     }
     /**
      * 根据用户名密码查询学生信息

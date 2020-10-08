@@ -59,6 +59,13 @@ public interface TeacherDao {
      * @return
      */
     Teacher selectTeacherByPhone(String tPhone);
+
+    /**
+     * 根据教师编号查询教师对象
+     * @param tId
+     * @return
+     */
+    Teacher selectTeacherByTId(int tId);
     /**
      * 分页查询所有的教师列表（审核通过与审核失败时要用的）
      * @return

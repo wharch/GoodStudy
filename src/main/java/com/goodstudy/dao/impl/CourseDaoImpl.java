@@ -232,6 +232,35 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     /**
+     * 根据课程编号查找课程对象
+     * @param cId
+     * @return
+     */
+    @Override
+    public Course findCrouseById(int cId) {
+        String sql = "select * from course where c_id = ?";
+        ResultSet rs = DBUtil.doQuery(sql, cId);
+        Course course = null;
+        try {
+            if (rs.next()) {
+                String cName = rs.getString("c_name");
+                String cMaster = rs.getString("c_master");
+                double cPrice = rs.getDouble("c_price");
+                int cStatus = rs.getInt("c_status");
+                String cInfo = rs.getString("c_info");
+                int tId = rs.getInt("t_id");
+                int kindId = rs.getInt("kind_id");
+                Kind kind = new Kind(kindId, null);
+                Teacher teacher = new Teacher(tId, null, null, null, null, null, null, null, null, 0, 0, null, null);
+                course = new Course(cId, cName, kind, teacher, cMaster, cInfo, cPrice, cStatus);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return course;
+    }
+
+    /**
      * 分页根据类型查看全部信息
      *
      * @param currentPage 当前页
@@ -269,6 +298,38 @@ public class CourseDaoImpl implements CourseDao {
         return page;
     }
 
+    /**
+     * 根据类别编号不分页查询课程列表
+     * @param kindId
+     * @return
+     */
+    @Override
+    public List<Course> findCourseByKind(int kindId) {
+        String sql = "select c.c_id,c.c_master,c.c_name,c.c_price,c.c_status,c.c_info,t.t_id,t.t_name,t.t_phone,k.kind_id,k.kind_name from course c inner join  kind k ON c.kind_id=k.kind_id left join teacher t ON t.t_id=c.t_id where c.kind_id = ?";
+        ResultSet rs = DBUtil.doQuery(sql, kindId);
+        List<Course> courses = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                int cId = rs.getInt("c_id");
+                String cMaster = rs.getString("c_master");
+                String cName = rs.getString("c_name");
+                double cPrice = rs.getDouble("c_price");
+                int cStatus = rs.getInt("c_status");
+                String cInfo = rs.getString("c_info");
+                int tId = rs.getInt("t_id");
+                String tName = rs.getString("t_name");
+                String tPhone = rs.getString("t_phone");
+                String kindName = rs.getString("kind_name");
+                Kind kind = new Kind(kindId, kindName);
+                Teacher teacher = new Teacher(tId, tName, null, null, tPhone, null, null, null, null, 0, 0, null, null);
+                Course course = new Course(cId, cName, kind, teacher, cMaster, cInfo, cPrice, cStatus);
+                courses.add(course);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return courses;
+    }
     /**
      * 添加课程
      *

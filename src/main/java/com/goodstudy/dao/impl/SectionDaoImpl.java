@@ -129,9 +129,7 @@ public class SectionDaoImpl implements SectionDao {
         String sql = "delete from section where section_id=?";
         if (DBUtil.doUpdate(sql, sectionId) > 0) {
             String sql1 = "delete from course_info where section_id=?";
-            if (DBUtil.doUpdate(sql1, sectionId) > 0) {
-                flag = true;
-            }
+            flag = true;
         }
         return flag;
     }

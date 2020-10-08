@@ -18,6 +18,9 @@ public interface CourseInfoDao {
     //按照课程编号查询该课程所有状态
     CourseInfo selectById(int infoId);
 
+    //按照章节编号查询该课程所有状态
+    List<CourseInfo> selectBysId(int sId);
+
     //添加课程详情
     boolean insert(CourseInfo courseInfo);
 
