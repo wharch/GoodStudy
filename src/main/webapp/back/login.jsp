@@ -47,7 +47,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label login-form"><i class="iconfont">&#xe82b;</i></label>
             <div class="layui-input-inline login-inline">
-                <input type="text" name="pwd" id="pwd" lay-verify="required" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
+                <input type="password" name="pwd" id="pwd" lay-verify="required" placeholder="请输入你的密码" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="form-actions">
