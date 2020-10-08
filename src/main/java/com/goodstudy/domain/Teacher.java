@@ -19,6 +19,14 @@ public class Teacher {
     public Teacher() {
     }
 
+    public Teacher(int tId) {
+        this.tId = tId;
+    }
+
+    public Teacher(String tName) {
+        this.tName = tName;
+    }
+
     public Teacher(int tId, String tName, String tGender, String hiredate, String tPhone, String tInfo, String tUsername, String tPwd, String tHeadImg, int role, int tState, String certificate, String certificateImg) {
         this.tId = tId;
         this.tName = tName;
@@ -35,6 +43,16 @@ public class Teacher {
         this.certificateImg = certificateImg;
     }
 
+    public Teacher(int tId, String tName, String tGender, String hiredate, String tPhone, String tInfo, String tPwd, String tHeadImg) {
+        this.tId = tId;
+        this.tName = tName;
+        this.tGender = tGender;
+        this.hiredate = hiredate;
+        this.tPhone = tPhone;
+        this.tInfo = tInfo;
+        this.tPwd = tPwd;
+        this.tHeadImg = tHeadImg;
+    }
     public int gettId() {
         return tId;
     }

@@ -12,6 +12,10 @@ public class Section {
     public Section() {
     }
 
+    public Section(int sectionId) {
+        this.sectionId = sectionId;
+    }
+
     public Section(int sectionId, String sectionName, Course course) {
         this.sectionId = sectionId;
         this.sectionName = sectionName;

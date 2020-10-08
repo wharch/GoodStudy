@@ -15,6 +15,9 @@ public class Kind {
         this.kindName = kindName;
     }
 
+    public Kind(String kindName) {
+        this.kindName = kindName;
+    }
 
     //toString方法
 

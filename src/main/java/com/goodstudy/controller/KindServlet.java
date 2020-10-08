@@ -3,6 +3,7 @@ package com.goodstudy.controller;
 import com.goodstudy.domain.Kind;
 import com.goodstudy.service.KindService;
 import com.goodstudy.service.impl.KindServiceImpl;
+import com.goodstudy.util.Page;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -36,6 +37,10 @@ public class KindServlet extends HttpServlet {
             String op = req.getParameter("op");
             if("findAll".equals(op)){
                 this.doFindAll(req,resp);
+            }else if ("addKind".equals(op)){
+                this.addKind(req,resp);
+            }else if("doFindAllByPage".equals(op)){
+                this.doFindAllByPage(req, resp);
             }
     }
 
@@ -48,5 +53,35 @@ public class KindServlet extends HttpServlet {
         List<Kind> allKind = kindService.findAllKind();
         req.setAttribute("allKind",allKind);
         req.getRequestDispatcher("/back/course-add.jsp").forward(req,resp);
+    }
+
+    /**
+     * 分页查询所有分类
+     * @param req
+     * @param resp
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void doFindAllByPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String pageNum =  req.getParameter("pageNum");
+        System.out.println(pageNum);
+        Page<Kind> KindByKIdByPage = kindService.findByPage(pageNum !=null ? Integer.valueOf(pageNum) : 1,3);
+        req.setAttribute("KindByKIdByPage",KindByKIdByPage);
+        req.getRequestDispatcher("/back/kind-list.jsp").forward(req,resp);
+    }
+
+    /**
+     * 添加课程类别
+     * @param req
+     * @param resp
+     * @throws IOException
+     * @throws ServletException
+     */
+    private void addKind(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String kindName = req.getParameter("name");
+        boolean info = this.kindService.addKind(new Kind(kindName));
+//        利用请求转发跳转界面 绝对路径
+        req.getRequestDispatcher("/back/kind-list.jsp").forward(req,resp);
+
     }
 }

@@ -73,7 +73,7 @@ public class Comment {
 
     @Override
     public String toString() {
-        return "Comment{" +
+        return "CommentDao{" +
                 "commentId=" + commentId +
                 ", student=" + student +
                 ", score=" + score +
