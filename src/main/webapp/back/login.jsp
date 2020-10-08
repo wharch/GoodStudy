@@ -52,7 +52,7 @@
         </div>
         <div class="form-actions">
             <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">登录</button>
-            <div class="forgot"><a href="#" class="forgot">忘记帐号或者密码</a></div>
+            <div class="forgot">还没有账户？<a href="<%=application.getContextPath()%>/back/teacherRegister.jsp" class="forgot">点击注册</a></div>
         </div>
     </form>
 </div>
