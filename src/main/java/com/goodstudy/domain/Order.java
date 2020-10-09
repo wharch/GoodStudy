@@ -6,7 +6,7 @@ package com.goodstudy.domain;
  */
 public class Order {
     private int waterId;//流水号
-    private int orderId;//订单号
+    private String orderId;//订单号
     private Student student;//学生类
     private Course course;//课程类
     private String orderTime;//下单时间
@@ -15,7 +15,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(int waterId, int orderId, Student student, Course course, String orderTime, double orderPrice) {
+    public Order(int waterId, String orderId, Student student, Course course, String orderTime, double orderPrice) {
         this.waterId = waterId;
         this.orderId = orderId;
         this.student = student;
@@ -32,11 +32,11 @@ public class Order {
         this.waterId = waterId;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

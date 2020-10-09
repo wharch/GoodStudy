@@ -30,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
         try {
             while (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
@@ -70,7 +70,7 @@ public class OrderDaoImpl implements OrderDao {
         try {
             while (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
@@ -103,13 +103,13 @@ public class OrderDaoImpl implements OrderDao {
      */
     @Override
     public List<Order> findAllOrderByStuId(int stuId) {
-        String sql = "select o.water_id,o.order_id,o.order_time,o.order_price,s.stu_name,s.stu_id,s.stu_email,c.* from order_info o inner join student s on o.stu_id = s.stu_id inner join course c on o.c_id = c.c_id where stu_id = ?";
+        String sql = "select o.water_id,o.order_id,o.order_time,o.order_price,s.stu_name,s.stu_id,s.stu_email,c.* from order_info o inner join student s on o.stu_id = s.stu_id inner join course c on o.c_id = c.c_id where o.stu_id = ?";
         ResultSet rs = DBUtil.doQuery(sql, stuId);
         List<Order> orders = new ArrayList<>();
         try {
             while (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
@@ -149,7 +149,7 @@ public class OrderDaoImpl implements OrderDao {
         try {
             while (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
@@ -188,7 +188,7 @@ public class OrderDaoImpl implements OrderDao {
         try {
             if (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
@@ -227,7 +227,7 @@ public class OrderDaoImpl implements OrderDao {
         try {
             while (rs.next()){
                 int waterId = rs.getInt("water_id");
-                int orderId = rs.getInt("order_id");
+                String orderId = rs.getString("order_id");
                 String orderTime = rs.getString("order_time");
                 double orderPrice = rs.getDouble("order_price");
                 String stuName = rs.getString("stu_name");
