@@ -77,4 +77,13 @@ public interface TeacherDao {
      * @return
      */
     List<Teacher> selectAllTeacher();
+
+    /**
+     * 根据教师状态分页查询教师列表
+     * @param currentPage
+     * @param pageSize
+     * @param tState 教师的审核状态
+     * @return
+     */
+    Page<Teacher> selectTeacherByStateByPage(int currentPage,int pageSize,int tState);
 }

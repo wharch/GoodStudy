@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/courseInfo")
 @MultipartConfig
@@ -37,7 +38,44 @@ public class CourseInfoServlet extends HttpServlet {
             reviewVideo(req,resp);
         }else if ("updateState".equals(op)){
             updateState(req,resp);
+        }else if("findBySectionId".equals(op)){
+            this.doFindBySectionId(req,resp);
+        }else if("delete".equals(op)){
+            this.doDelByInfoId(req,resp);
         }
+    }
+
+    /**
+     * 根据课程详情编号删除该小节课程详情
+     * @param req
+     * @param resp
+     */
+    private void doDelByInfoId(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String infoId = req.getParameter("infoId");
+        boolean b = service.removeCourseInfo(Integer.parseInt(infoId));
+        if(b){
+            PrintWriter out = resp.getWriter();
+            out.write("yes");
+            out.flush();
+        }else{
+            PrintWriter out = resp.getWriter();
+            out.write("no");
+            out.flush();
+        }
+    }
+
+    /**
+     * 根据章节编号分页查询课程详情列表
+     * @param req
+     * @param resp
+     */
+    private void doFindBySectionId(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String sectionId = req.getParameter("sectionId");
+        String pageNum = req.getParameter("pageNum");
+        Page<CourseInfo> courseInfoPage = service.selectBySIdAndPage(pageNum == null ? 1 : Integer.parseInt(pageNum), 5, Integer.valueOf(sectionId));
+        req.setAttribute("courseInfoPage",courseInfoPage);
+        req.getRequestDispatcher("/back/courseInfo-list.jsp").forward(req,resp);
+
     }
 
     /**

@@ -15,11 +15,14 @@ public interface CourseInfoDao {
     //无分页查询全部课程详情信息
     List<CourseInfo> selectAll();
 
-    //按照课程编号查询该课程所有状态
+    //按照课程编号查询该课程信息
     CourseInfo selectById(int infoId);
 
-    //按照章节编号查询该课程所有状态
+    //按照章节编号查询该课程列表
     List<CourseInfo> selectBysId(int sId);
+
+    //按照章节编号分页查询该课程列表
+    Page<CourseInfo> selectBySIdAndPage(int currentPage,int pageSize,int sId);
 
     //添加课程详情
     boolean insert(CourseInfo courseInfo);

@@ -1,15 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2020/9/22
-  Time: 17:23
+  Date: 2020/10/9
+  Time: 10:21
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="en">
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>后台登录-X-admin1.1</title>
+    <title>教师列表</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
@@ -37,7 +38,7 @@
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
             <a href="javascript:;"  id="adminName">
-               ${sessionScope.adminLogin.tName}
+                ${sessionScope.adminLogin.tName}
             </a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a href="#"></a></dd>
@@ -101,12 +102,120 @@
             </ul>
         </div>
     </div>
-    <!-- 左侧菜单结束 -->
-    <!-- 右侧主体开始 -->
+    <!-- 左侧菜单结束 --> <!-- 右侧主体开始 -->
     <div class="page-content">
         <div class="content">
             <!-- 右侧内容框架，更改从这里开始 -->
-
+            <form class="layui-form xbs" action="" >
+            </form>
+            <div class="layui-input-inline">
+                <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-input-inline" style="width:80px">
+                <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            </div>
+            <br>
+            <div class="layui-tab layui-tab-card" style="border: 0;height: 600px">
+                <ul class="layui-tab-title" style="background-color: rgba(0,0,0,0.1);color: white;border: 0">
+                    <a style="color: white" href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&tState=1"><li class="">已通过</li></a>
+                    <a style="color: white" href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&tState=2"><li>待审核</li></a>
+                </ul>
+                <div class="layui-tab-content" style="height: 100px;">
+                    <div class="layui-tab-item layui-show">
+                        <table class="layui-table" method="post">
+                            <thead>
+                            <tr>
+                                <th>
+                                    编号
+                                </th>
+                                <th>
+                                    姓名
+                                </th>
+                                <th>
+                                    性别
+                                </th>
+                                <th>
+                                    入职日期
+                                </th>
+                                <th>
+                                    电话
+                                </th>
+                                <th>
+                                    头像
+                                </th>
+                                <th>
+                                    证书编号
+                                </th>
+                                <th>
+                                    手持证书照片
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    审核操作
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="t" items="${teacherPage.data}">
+                                <tr>
+                                    <td>
+                                            ${t.tId}
+                                    </td>
+                                    <td>
+                                            ${t.tName}
+                                    </td>
+                                    <td>
+                                            ${t.tGender}
+                                    </td>
+                                    <td>
+                                            ${t.hiredate}
+                                    </td>
+                                    <td>
+                                            ${t.tPhone}
+                                    </td>
+                                    <td>
+                                        <img src="<%=application.getContextPath()%>/teacherHeadImg/${t.tHeadImg}"width="100"height="100">
+                                    </td>
+                                    <td>
+                                            ${t.certificate}
+                                    </td>
+                                    <td>
+                                        <img src="<%=application.getContextPath()%>/certificate/${t.certificateImg}"width="100"height="100">
+                                    </td>
+                                    <td>
+                                        <c:if test="${t.tState == 1}">
+                                            已通过
+                                        </c:if>
+                                        <c:if test="${t.tState == 2}">
+                                            待审核
+                                        </c:if>
+                                    </td>
+                                    <td class="td-manage">
+                                        <c:if test="${t.tState == 1}">
+                                            <a href="<%=application.getContextPath()%>/teacher?op=updateState&tStateNow=1&tId=${t.tId}">不通过</a>
+                                        </c:if>
+                                        <c:if test="${t.tState == 2}">
+                                            <a href="<%=application.getContextPath()%>/teacher?op=updateState&tStateNow=2&tId=${t.tId}">通过</a>
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                            <tr>
+                                <td colspan="9" style="text-align: center">
+                                    <a href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&pageNum=1&tState=${requestScope.state}">首页</a>
+                                    <a href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&pageNum=${requestScope.teacherPage.prev()}&tState=${requestScope.state}">上一页</a>
+                                    当前${requestScope.teacherPage.currentPage}页/总共${requestScope.teacherPage.totalPageCount()}页
+                                    <a href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&pageNum=${requestScope.teacherPage.next()}&tState=${requestScope.state}">下一页</a>
+                                    <a href="<%=application.getContextPath()%>/teacher?op=findByStateByPage&pageNum=${requestScope.teacherPage.totalPageCount()}&tState=${requestScope.state}">尾页</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <!-- 右侧内容框架，更改从这里结束 -->
         </div>
     </div>

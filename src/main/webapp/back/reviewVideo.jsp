@@ -64,7 +64,7 @@
                     </a>
                     <ul class="sub-menu">
                         <li>
-                            <a href="member-list.html">
+                            <a href="<%=application.getContextPath()%>/teacher?op=findByStateByPage">
                                 <i class="iconfont">&#xe6a7;</i>
                                 教师列表
                             </a>

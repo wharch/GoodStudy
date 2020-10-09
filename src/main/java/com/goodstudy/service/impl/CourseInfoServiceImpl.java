@@ -106,5 +106,10 @@ CourseInfoDao courseInfoDao = new CourseInfoDaoImpl();
         return courseInfoDao.selectBysId(sId);
     }
 
+    @Override
+    public Page<CourseInfo> selectBySIdAndPage(int currentPage, int pageSize, int sId) {
+        return courseInfoDao.selectBySIdAndPage(currentPage,pageSize,sId);
+    }
+
 
 }

@@ -158,4 +158,16 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherDao.selectAllTeacher();
     }
 
+    /**
+     * 根据教师的状态分页查询教师的列表
+     * @param currentPage
+     * @param pageSize
+     * @param tState
+     * @return
+     */
+    @Override
+    public Page<Teacher> selectTeacherByStateByPage(int currentPage, int pageSize, int tState) {
+        return teacherDao.selectTeacherByStateByPage(currentPage,pageSize,tState);
+    }
+
 }

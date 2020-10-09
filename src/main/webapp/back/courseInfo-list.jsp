@@ -1,16 +1,16 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2020/10/7
-  Time: 22:22
+  Date: 2020/10/5
+  Time: 18:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>课程列表</title>
+    <title>课程详情列表</title>
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -22,17 +22,11 @@
     <script type="text/javascript" src="<%=application.getContextPath()%>/back/js/xadmin.js"></script>
     <script type="text/javascript">
         $(function(){
-            //判断有没有进行登录
             if(${sessionScope.teacherLogin == null}){
                 alert("您还未进行登录，请登录后查看...")
                 location.href="./login.jsp";
             }
-            //判断有没有上传成功
-            if(${requestScope.addCourseMsg == 'yes'}){
-                alert("上传成功！")
-            }else if(${requestScope.addCourseMsg == 'no'}){
-                alert("上传失败！")
-            }
+
         })
     </script>
 </head>
@@ -97,7 +91,7 @@
                 <div class="layui-form-pane" style="text-align: center;">
                     <div class="layui-form-item" style="display: inline-block;">
                         <div class="layui-input-inline">
-                            <input type="text" name="username"  placeholder="请输入章节名" autocomplete="off" class="layui-input">
+                            <input type="text" name="username"  placeholder="请输入课程名" autocomplete="off" class="layui-input">
                         </div>
                         <div class="layui-input-inline" style="width:80px">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -105,19 +99,33 @@
                     </div>
                 </div>
             </form>
-            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="section_add('添加章节','<%=application.getContextPath()%>/course?op=findByName&cName=${requestScope.cName}','4','','510')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
-            <table class="layui-table text-center" id="menuTable">
-                <caption></caption>
+            <xblock><button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button><button class="layui-btn" onclick="course_add('添加课程','<%=application.getContextPath()%>/kind?op=findAll','600','500')"><i class="layui-icon">&#xe608;</i>添加</button><span class="x-right" style="line-height:40px">共有数据：88 条</span></xblock>
+            <table class="layui-table text-center">
                 <thead>
                 <tr>
                     <th>
                         <input type="checkbox" name="" value="">
                     </th>
                     <th>
-                        章节编号
+                        小节编号
                     </th>
                     <th>
-                        章节名称
+                        小节名
+                    </th>
+                    <th>
+                        小节视频
+                    </th>
+                    <th>
+                        小节笔记
+                    </th>
+                    <th>
+                        章节名
+                    </th>
+                    <th>
+                        课程名
+                    </th>
+                    <th>
+                        状态
                     </th>
                     <th colspan="2">
                         操作
@@ -125,42 +133,64 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach items="${requestScope.allSectionByPage.getData()}" var="section">
+                <c:forEach items="${requestScope.courseInfoPage.data}" var="courseInfo">
                     <tr>
                         <td>
                             <input type="checkbox" value="1" name="">
                         </td>
                         <td>
-                                ${section.sectionId}
+                                ${courseInfo.infoId}
                         </td>
-
+                        <td>
+                                ${courseInfo.knobbleName}
+                        </td>
+                        <td>
+                            <p style="display: none" id="video">${courseInfo.video}</p>
+                            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
+                                <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">查看视频</button>
+                            </div>
+                        </td>
                         <td >
-                                ${section.sectionName}
+                            <a href="<%=application.getContextPath()%>/note/${courseInfo.note}">下载笔记并查看</a>
+                        </td>
+                        <td>
+                                ${courseInfo.section.sectionName}
+                        </td>
+                        <td >
+                                ${courseInfo.section.course.cName}
+                        </td>
+                        <td class="td-status">
+                            <c:if test="${courseInfo.infoState == 1}">
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">
+                                    审核已通过
+                                </span>
+                            </c:if>
+                            <c:if test="${courseInfo.infoState == 0}">
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">
+                                    审核未通过
+                                </span>
+                            </c:if>
+                            <c:if test="${courseInfo.infoState == 2}">
+                                <span class="layui-btn layui-btn-normal layui-btn-mini">
+                                    待审核
+                                </span>
+                            </c:if>
                         </td>
                         <td class="td-manage">
-                            <a style="text-decoration:none"  onclick="course_update('修改章节','section-update.jsp','10001','600','400')" href="javascript:;" title="修改章节">
-                                <i class="layui-icon">&#xe631;</i>
-                            </a>
-                            <a title="删除" href="javascript:;" onclick="section_del(this,${section.sectionId})"  style="text-decoration:none">
+                            <a title="删除" href="javascript:;" onclick="courseInfo_del(this,${courseInfo.infoId})"  style="text-decoration:none">
                                 <i class="layui-icon">&#xe640;</i>
                             </a>
-                            <a title="查看小节课程" href="<%=application.getContextPath()%>/courseInfo?op=findBySectionId&sectionId=${section.sectionId}" style="text-decoration:none">
-                                <i class="layui-icon">&#xe631;</i>
-                            </a>
-                            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
-                                <button data-method="offset"  data-type="auto" class="layui-btn layui-btn-normal">上传视频与笔记</button>
-                            </div>
                         </td>
                     </tr>
                 </c:forEach>
                 </tbody>
                 <tr>
                     <td colspan="9" style="text-align: center">
-                        <a href="<%=application.getContextPath()%>/section?op=findByCId&pageNum=1&cId=${requestScope.cId}">首页</a>
-                        <a href="<%=application.getContextPath()%>/section?op=findByCId&pageNum=${requestScope.allSectionByPage.prev()}&cId=${requestScope.cId}">上一页</a>
-                        当前${requestScope.allSectionByPage.currentPage}页/总共${requestScope.allSectionByPage.totalPageCount()}页
-                        <a href="<%=application.getContextPath()%>/section?op=findByCId&pageNum=${requestScope.allSectionByPage.next()}&cId=${requestScope.cId}">下一页</a>
-                        <a href="<%=application.getContextPath()%>/section?op=findByCId&pageNum=${requestScope.allSectionByPage.totalPageCount()}&cId=${requestScope.cId}">尾页</a>
+                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=1">首页</a>
+                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.prev()}">上一页</a>
+                        当前${requestScope.courseByTIdByPage.currentPage}页/总共${requestScope.courseByTIdByPage.totalPageCount()}页
+                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.next()}">下一页</a>
+                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.totalPageCount()}">尾页</a>
                     </td>
                 </tr>
             </table>
@@ -204,20 +234,6 @@
     layui.use(['laydate'], function(){
         laydate = layui.laydate;//日期插件
 
-        //以上模块根据需要引入
-        //
-        //
-        //
-        //
-        // document.getElementById('LAY_demorange_s').onclick = function(){
-        //     start.elem = this;
-        //     laydate(start);
-        // }
-        // document.getElementById('LAY_demorange_e').onclick = function(){
-        //     end.elem = this
-        //     laydate(end);
-        // }
-
     });
 
     //批量删除提交
@@ -232,9 +248,38 @@
         x_admin_show(title,url,w,h);
     }
     /*用户-查看*/
-    function member_show(title,url,id,w,h){
-        x_admin_show(title,url,w,h);
+    function section_show(url){
+        location.href = url;
     }
+
+    /*课程-下架*/
+    function course_stop(obj,id){
+        layer.confirm('确认要下架吗？',function(){
+            $.ajax({
+                async:true,
+                url:"<%=application.getContextPath()%>/course",
+                type:"post",
+                data:{
+                    op:"delete",
+                    cId:id
+                },
+                success:function (data) {
+                    if("yes"== data){
+                        //发异步把用户状态进行更改
+                        $(obj).parents("tr").find(".td-status").html('<span class="layui-btn layui-btn-disabled layui-btn-mini">已下架</span>');
+                        $(obj).remove();
+                        layer.msg('已停用!',{icon: 5,time:1000});
+                    }
+
+                },
+                error:function (xhr,status,error) {
+                    alert("ajax异步刷新失败！")
+                }
+
+            });
+        });
+    }
+
     // 用户-编辑
     function section_add (title,url,id,w,h) {
         x_admin_show(title,url,w,h);
@@ -243,20 +288,19 @@
     function course_update(title,url,id,w,h){
         x_admin_show(title,url,w,h);
     }
-    /*章节-删除*/
-    function section_del(obj,id){
-        layer.confirm('确认要删除吗？',function(){
+    /*课程详情-删除*/
+    function courseInfo_del(obj,infoId){
+        layer.confirm('确认要删除吗？',function(index){
             $.ajax({
                 async:true,
-                url:"<%=application.getContextPath()%>/section",
+                url:"<%=application.getContextPath()%>/courseInfo",
                 type:"post",
                 data:{
                     op:"delete",
-                    sectionId:id
+                    infoId:infoId
                 },
                 success:function (data) {
-                    if("yes" == data){
-                        //发异步把用户状态进行更改
+                    if("yes"== data){
                         //发异步删除数据
                         $(obj).parents("tr").remove();
                         layer.msg('已删除!',{icon:1,time:1000});
@@ -271,7 +315,9 @@
 
         });
     }
-    //视频和笔记的上传
+</script>
+<script>
+    var a = $("#video").text();;
     layui.use('layer', function () { //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
         var active = {
@@ -283,41 +329,9 @@
                     type: 1
                     , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
                     , id: 'layerDemo' + type //防止重复弹出
-                    , area: ['600px', '650px']
-                    , title: '上传视频和笔记'
-                    , content: '<div style="padding: 20px 100px;">\n' +
-                        '<div class="login-box" style="height: auto">\n' +
-                        '    <form class="layui-form layui-form-pane" action="<%=application.getContextPath()%>/courseInfo?op=addCourseInfo" method="post" enctype="multipart/form-data">\n' +
-                        '\n' +
-                        '        <h3>上传视频和笔记</h3>\n' +'<p>章节名为:'+$(othis).parents("td").prev().html()+'</p><br>'+
-                        '        <input type="text"  name="cId" hidden="hidden" value="${requestScope.cId}">\n'+
-                        '        <input type="text"  name="sId" hidden="hidden" value="'+$(othis).parents("td").prev().prev().html()+'">\n'+
-                        '        <label class="login-title" for="video">上传视频</label>\n' +
-                        '        <div class="layui-form-item" id="video">\n' +
-                        '            <label class="layui-form-label login-form" style="height: 20px"><i class="iconfont">&#xe675;</i></label>\n' +
-                        '            <div class="layui-input-inline login-inline" >\n' +
-                        '                <input type="file"  name="video" accept="video/*" lay-verify="required"  autocomplete="off" class="layui-input">\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '        <label class="login-title" for="knobbleName">小节名称</label>\n' +
-                        '        <div class="layui-form-item" id="knobbleName">\n' +
-                        '            <label class="layui-form-label login-form" style="height: 20px"><i class="iconfont">&#xe673;</i></label>\n' +
-                        '            <div class="layui-input-inline login-inline" >\n' +
-                        '                <input type="text"  name="knobbleName" lay-verify="required" placeholder="请输入小节名称"  autocomplete="off" class="layui-input">\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '        <label class="login-title" for="note">上传笔记</label>\n' +
-                        '        <div class="layui-form-item" id="note">\n' +
-                        '            <label class="layui-form-label login-form" style="height: 20px"><i class="iconfont">&#xe676;</i></label>\n' +
-                        '            <div class="layui-input-inline login-inline" >\n' +
-                        '                <input type="file"  name="note" accept=".doc,.pdf,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" lay-verify="required" placeholder="请输入你的证件号" autocomplete="off" class="layui-input">\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '        <div class="form-actions">\n' +
-                        '            <button class="btn btn-warning pull-right" lay-submit lay-filter="login"  type="submit">上传</button>\n' +
-                        '        </div>\n' +
-                        '    </form>\n' +
-                        '</div> </div>'
+                    , area: ['800px', '500px']
+                    , title: '视频'
+                    , content:'<video  style="width: 700px;height:460px" controls = "controls"> <source src="<%=application.getContextPath()%>/video'+a+'"></source></video>'
                     , btn: '关闭全部'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩
@@ -328,7 +342,7 @@
             }
         };
         $('#layerDemo .layui-btn').on('click', function () {
-            var othis = $(this), method = othis.data('method') ;
+            var othis = $(this), method = othis.data('method');
             active[method] ? active[method].call(this, othis) : '';
         });
 

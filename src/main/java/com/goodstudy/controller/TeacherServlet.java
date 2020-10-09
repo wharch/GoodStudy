@@ -49,7 +49,46 @@ public class TeacherServlet extends HttpServlet {
         }else if ("doFindAllByPage".equals(op)){
             //分页查询全部教师信息
             this.doFindAllByPage(req, resp);
+        }else if("findByStateByPage".equals(op)){
+            //根据教师状态分页查询教师列表
+            this.doFindByStateByPage(req,resp);
+        }else if("updateState".equals(op)){
+            //根据教师的不同状态对教师进行审核
+            this.doUpdateState(req,resp);
         }
+    }
+
+    /**
+     * 根据不同的状态对教师进行不同的操作
+     * @param req
+     * @param resp
+     */
+    private void doUpdateState(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String tStateNow = req.getParameter("tStateNow");
+        String tId = req.getParameter("tId");
+        boolean b = teacherService.updateTeacherStatus(Integer.parseInt(tId), Integer.valueOf(tStateNow));
+        req.getRequestDispatcher("/teacher?op=findByStateByPage").forward(req,resp);
+    }
+
+    /**
+     * 根据教师状态分页查询教师列表
+     * @param req
+     * @param resp
+     */
+    private void doFindByStateByPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+         String tState = req.getParameter("tState");
+         String pageNum = req.getParameter("pageNum");
+         Page<Teacher> teacherPage = null;
+         if(tState == null || tState == ""){
+             teacherPage = teacherService.selectAllTeacherByPage(pageNum == null ? 1 : Integer.parseInt(pageNum), 5);
+         }else{
+             teacherPage = teacherService.selectTeacherByStateByPage(pageNum == null ? 1 : Integer.parseInt(pageNum), 5, Integer.valueOf(tState));
+             req.setAttribute("state",tState);
+         }
+
+        req.setAttribute("teacherPage",teacherPage);
+        req.getRequestDispatcher("/back/teacher-list.jsp").forward(req,resp);
+
     }
 
 

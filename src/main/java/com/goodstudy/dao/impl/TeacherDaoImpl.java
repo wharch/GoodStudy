@@ -136,7 +136,7 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public Teacher selectTeacherByPhone(String tPhone) {
-        String sql = "select * from teacher where t_phone = ?";
+        String sql = "select * from teacher where t_phone = ? and role = 2";
         ResultSet rs = DBUtil.doQuery(sql, tPhone);
         Teacher teacher = null;
         try {
@@ -200,7 +200,7 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public Page<Teacher> selectAllTeacherByPage(int currentPage,int pageSize) {
-        String sql = "select * from teacher";
+        String sql = "select * from teacher where role = 2";
         Page page = DBUtil.doQueryByPage(sql, currentPage, pageSize);
         ResultSet rs = page.getRs();
         List<Teacher> teachers = new ArrayList<>();
@@ -235,7 +235,7 @@ public class TeacherDaoImpl implements TeacherDao {
      */
     @Override
     public List<Teacher> selectAllTeacher() {
-        String sql = "select * from teacher";
+        String sql = "select * from teacher and role = 2";
         ResultSet rs = DBUtil.doQuery(sql);
         List<Teacher> teachers = new ArrayList<>();
         try {
@@ -260,5 +260,42 @@ public class TeacherDaoImpl implements TeacherDao {
             e.printStackTrace();
         }
         return teachers;
+    }
+
+    /**
+     * 根据教师的状态分页查询教师的列表
+     * @param currentPage
+     * @param pageSize
+     * @param tState 教师的审核状态
+     * @return
+     */
+    @Override
+    public Page<Teacher> selectTeacherByStateByPage(int currentPage, int pageSize, int tState) {
+        String sql = "select * from teacher where t_state = ? and role = 2";
+        Page page = DBUtil.doQueryByPage(sql, currentPage, pageSize,tState);
+        ResultSet rs = page.getRs();
+        List<Teacher> teachers = new ArrayList<>();
+        try {
+            while (rs.next()){
+                int tId = rs.getInt("t_id");
+                String tName = rs.getString("t_name");
+                String tGender = rs.getString("t_gender");
+                String hiredate = rs.getString("hiredate");
+                String tPhone = rs.getString("t_phone");
+                String tInfo = rs.getString("t_info");
+                String tUsername = rs.getString("t_username");
+                String tPwd = rs.getString("t_pwd");
+                String tHeadImg = rs.getString("t_head_img");
+                int role = rs.getInt("role");
+                String certificate = rs.getString("certificate");
+                String certificateImg = rs.getString("certificate_img");
+                Teacher teacher = new Teacher(tId,tName,tGender,hiredate,tPhone,tInfo,tUsername,tPwd,tHeadImg,role,tState,certificate,certificateImg);
+                teachers.add(teacher);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        page.setData(teachers);
+        return page;
     }
 }

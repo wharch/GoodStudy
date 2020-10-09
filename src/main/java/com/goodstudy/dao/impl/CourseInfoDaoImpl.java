@@ -130,6 +130,36 @@ public class CourseInfoDaoImpl implements CourseInfoDao {
     }
 
     /**
+     * 根据章节编号分页查询课程详情列表（包括状态）
+     * @param sId
+     * @return
+     */
+    @Override
+    public Page<CourseInfo> selectBySIdAndPage(int currentPage,int pageSize,int sId) {
+        String sql = "select course_info.info_id,course_info.video,course_info.note,course_info.knobble_name,inf.section_id,inf.section_name,inf.c_id,inf.c_name,course_info.info_state from course_info inner join (select section.section_id,section.section_name,section.c_id,co.c_name,co.t_name from section inner join (select course.c_id,course.c_name,teacher.t_name from course  inner join teacher on course.t_id = teacher.t_id) as co on section.c_id=co.c_id) as inf on course_info.section_id=inf.section_id where inf.section_id = ?";
+        Page<CourseInfo> page = DBUtil.doQueryByPage(sql, currentPage, pageSize,sId);
+        ResultSet rs = page.getRs();
+        List<CourseInfo> courseInfos = new ArrayList<>();
+        try {
+            while (rs.next()){
+                int infoId = rs.getInt("info_id");
+                String video = rs.getString("video");
+                String note = rs.getString("note");
+                String knobbleName = rs.getString("knobble_name");
+                String sectionName = rs.getString("section_name");
+                String cName = rs.getString("c_name");
+                int infoState = rs.getInt("info_state");
+                CourseInfo courseInfo = new CourseInfo(infoId,video,note,knobbleName,new Section(sId,sectionName,new Course(0,cName,null,null,null,null,0,0)),null,infoState);
+                courseInfos.add(courseInfo);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        page.setData(courseInfos);
+        return page;
+    }
+
+    /**
      * 添加课程详情
      *
      * @param courseInfo 课程详情对象

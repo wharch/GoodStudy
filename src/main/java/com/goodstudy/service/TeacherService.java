@@ -84,4 +84,13 @@ public interface TeacherService {
      * @return
      */
     List<Teacher> selectAllTeacher();
+
+    /**
+     * 根据教师的状态分页查询教师列表
+     * @param currentPage
+     * @param pageSize
+     * @param tState
+     * @return
+     */
+    Page<Teacher> selectTeacherByStateByPage(int currentPage,int pageSize,int tState);
 }
