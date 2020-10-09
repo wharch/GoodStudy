@@ -1,0 +1,111 @@
+.cards_wrapper {
+    font-family: "Roboto", sans-serif;
+}
+.card {
+    width: 850px;
+    margin: 0 auto 5px;
+    cursor: pointer;
+}
+.card .card_description {
+    border-radius: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: border-radius 0.6s ease-in-out;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.card .card_description .date,
+.card .card_description .title {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 20px;
+}
+.card .card_description .date {
+    margin: 0 80px 0 20px;
+}
+.card.today .card_description {
+    background-color: #ffb300;
+}
+.card.tomorrow .card_description {
+    background-color: #EF6C00;
+}
+.card.unfolded .top {
+    animation: unfold_top 0.6s ease-in-out;
+}
+.card.unfolded .bottom {
+    animation: unfold_bottom 0.6s ease-in-out;
+}
+.card.unfolded .card_description {
+    border-radius: 5px 5px 0 0;
+}
+.card.folded .top {
+    animation: fold_top 0.6s forwards ease-in-out;
+}
+.card.folded .bottom {
+    animation: fold_bottom 0.6s forwards ease-in-out;
+}
+.top,
+.bottom {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.bottom {
+    border-radius: 0 0 5px 5px;
+}
+.alarm_item {
+    align-items: center;
+}
+.alarm_item .time_block {
+    margin-left: 20px;
+}
+.alarm_item .day_part {
+    font-size: 10px;
+    margin: 0 25px 0 5px;
+    color: #798384;
+}
+.alarm_item .time {
+    padding: 10px;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #03a9f4;
+}
+.alarm_item .alarm_item_description {
+    color: #798384;
+}
+@keyframes fold_top {
+    100% {
+        transform-origin: top;
+        transform: perspective(100px) rotateX(-10deg);
+        height: 0;
+    }
+}
+@keyframes fold_bottom {
+    100% {
+        transform-origin: bottom;
+        transform: perspective(100px) rotateX(10deg);
+        height: 0;
+    }
+}
+@keyframes unfold_top {
+    0% {
+        transform-origin: top;
+        height: 0;
+        transform: perspective(100px) rotateX(-10deg);
+    }
+    100% {
+        transform: perspective(100px) rotateX(0deg);
+        height: 80px;
+    }
+}
+@keyframes unfold_bottom {
+    0% {
+        transform-origin: bottom;
+        height: 0;
+        transform: perspective(100px) rotateX(10deg);
+    }
+    100% {
+        transform: perspective(100px) rotateX(0deg);
+        height: 80px;
+    }
+}

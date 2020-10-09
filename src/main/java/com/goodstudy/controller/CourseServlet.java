@@ -1,14 +1,8 @@
 package com.goodstudy.controller;
 
 import com.goodstudy.domain.*;
-import com.goodstudy.service.CourseInfoService;
-import com.goodstudy.service.CourseService;
-import com.goodstudy.service.KindService;
-import com.goodstudy.service.SectionService;
-import com.goodstudy.service.impl.CourseInfoServiceImpl;
-import com.goodstudy.service.impl.CourseServiceImpl;
-import com.goodstudy.service.impl.KindServiceImpl;
-import com.goodstudy.service.impl.SectionServiceImpl;
+import com.goodstudy.service.*;
+import com.goodstudy.service.impl.*;
 import com.goodstudy.util.Page;
 import com.goodstudy.util.RandomUtil;
 import javax.servlet.ServletException;
@@ -29,11 +23,13 @@ public class CourseServlet extends HttpServlet {
     private KindService kindService;
     private SectionService sectionService;
     private CourseInfoService courseInfoService;
+    private OrderService orderService;
     public CourseServlet() {
         this.courseService = new CourseServiceImpl();
         this.kindService = new KindServiceImpl();
         this.sectionService = new SectionServiceImpl();
         this.courseInfoService = new CourseInfoServiceImpl();
+        this.orderService = new OrderServiceImpl();
     }
 
     @Override
@@ -72,16 +68,34 @@ public class CourseServlet extends HttpServlet {
      */
     private void showCourse(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String cId = req.getParameter("cId");
+        System.out.println(cId);
         List<List<CourseInfo>> lci = new ArrayList<>();
         Course course = courseService.findCrouseById(Integer.valueOf(cId));
         req.setAttribute("course",course);
+        System.out.println(course);
         List<Section> sections = sectionService.findAllSection(Integer.valueOf(cId));
         req.setAttribute("sections",sections);
+        System.out.println(sections);
         for (Section section : sections) {
             List<CourseInfo> courseInfos = courseInfoService.selectBysId(section.getSectionId());
             lci.add(courseInfos);
         }
         req.setAttribute("lci",lci);
+        HttpSession session = req.getSession();
+        Student student = (Student) session.getAttribute("admin");
+        System.out.println(student);
+        if (student==null){
+            resp.sendRedirect(this.getServletContext().getContextPath()+"/front/login.jsp");
+        }else {
+            //0 为已购买 1为未购买
+            int flag = 0;
+            if (orderService.findAllOrderByStuIdAndCId(student.getStuId(), Integer.valueOf(cId))==null){
+                flag=1;
+            }
+            req.setAttribute("flag",flag);
+        }
+
+        System.out.println(lci);
         req.getRequestDispatcher("/front/courseDetail.jsp").forward(req,resp);
 
 
