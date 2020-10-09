@@ -186,11 +186,11 @@
                 </tbody>
                 <tr>
                     <td colspan="9" style="text-align: center">
-                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=1">首页</a>
-                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.prev()}">上一页</a>
-                        当前${requestScope.courseByTIdByPage.currentPage}页/总共${requestScope.courseByTIdByPage.totalPageCount()}页
-                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.next()}">下一页</a>
-                        <a href="<%=application.getContextPath()%>/course?op=findAllByPage&pageNum=${requestScope.courseByTIdByPage.totalPageCount()}">尾页</a>
+                        <a href="<%=application.getContextPath()%>/courseInfo?op=findBySectionId&sectionId=${requestScope.sId}&pageNum=1">首页</a>
+                        <a href="<%=application.getContextPath()%>/courseInfo?op=findBySectionId&sectionId=${requestScope.sId}&pageNum=${requestScope.courseInfoPage.prev()}">上一页</a>
+                        当前${requestScope.courseInfoPage.currentPage}页/总共${requestScope.courseInfoPage.totalPageCount()}页
+                        <a href="<%=application.getContextPath()%>/courseInfo?op=findBySectionId&sectionId=${requestScope.sId}&pageNum=${requestScope.courseInfoPage.next()}">下一页</a>
+                        <a href="<%=application.getContextPath()%>/courseInfo?op=findBySectionId&sectionId=${requestScope.sId}&pageNum=${requestScope.courseInfoPage.totalPageCount()}">尾页</a>
                     </td>
                 </tr>
             </table>

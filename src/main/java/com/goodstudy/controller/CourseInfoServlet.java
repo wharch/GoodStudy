@@ -74,6 +74,7 @@ public class CourseInfoServlet extends HttpServlet {
         String pageNum = req.getParameter("pageNum");
         Page<CourseInfo> courseInfoPage = service.selectBySIdAndPage(pageNum == null ? 1 : Integer.parseInt(pageNum), 5, Integer.valueOf(sectionId));
         req.setAttribute("courseInfoPage",courseInfoPage);
+        req.setAttribute("sid",sectionId);
         req.getRequestDispatcher("/back/courseInfo-list.jsp").forward(req,resp);
 
     }

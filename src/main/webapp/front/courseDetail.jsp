@@ -365,48 +365,6 @@
                                                         <div class="title" style="padding-left: 10px">${section.sectionName}</div>
                                                     </div>
                                                     <div class="alarm_item top">
-                                                        <c:if test="${flag==0}">
-                                                            <c:forEach var="lic" items="${lci}">
-                                                                <c:forEach items="${lic}" var="courseinfo">
-                                                                    <c:if test="${courseinfo.section.sectionId==section.sectionId}">
-                                                                        <c:if test="${courseinfo.infoState==1}">
-                                                                            <div style="margin-left: 10px;margin-top: 5px;float: left">
-                                                                                <div style="width: 200px;height: 100px;background-image: url(<%=application.getContextPath()%>/courseupload/${course.cMaster});">
-                                                                                    <div style="text-align: center" id="one" class="button">
-                                                                                        <span style="line-height: 100px" class="fa fa-play"><i class="ripple"></i></span>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div style="height: 5px"></div>
-                                                                                <div style="text-align: center">
-                                                                                    <span style="width:200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">${courseinfo.knobbleName}</span>
-                                                                                </div>
-                                                                                <div style="text-align: center">
-                                                                                    <a href="<%=application.getContextPath()%>/note${courseinfo.note}">
-                                                                                        <button style="margin-top: 0px;border-radius: 50px;border: 1px solid #ffb300;background-color: white;width: 100px;font-size: 10px">
-                                                                                            下载笔记
-                                                                                        </button>
-                                                                                    </a>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div id="modal-container" class="close">
-                                                                                <div class="modal-background">
-                                                                                    <div class="modal">
-                                                                                        <div>
-                                                                                            <video muted  style="width: 700px;height:460px"  autoplay="autoplay" controls = "controls">
-                                                                                                <source src="<%=application.getContextPath()%>/video${courseinfo.video}" />
-                                                                                            </video>
-                                                                                        </div>
-                                                                                        <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
-                                                                                            <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
-                                                                                        </svg>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </c:if>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </c:forEach>
-                                                        </c:if>
                                                         <c:if test="${course.cPrice<=0}">
                                                             <c:forEach var="lic" items="${lci}">
                                                                 <c:forEach items="${lic}" var="courseinfo">
@@ -449,10 +407,53 @@
                                                                 </c:forEach>
                                                             </c:forEach>
                                                         </c:if>
-                                                        <c:if test="${flag==1}">
-                                                            您还未购买此课程
+                                                        <c:if test="${course.cPrice>0}">
+                                                            <c:if test="${flag==1}">
+                                                                您还未购买此课程
+                                                            </c:if>
+                                                            <c:if test="${flag==0}">
+                                                                <c:forEach var="lic" items="${lci}">
+                                                                    <c:forEach items="${lic}" var="courseinfo">
+                                                                        <c:if test="${courseinfo.section.sectionId==section.sectionId}">
+                                                                            <c:if test="${courseinfo.infoState==1}">
+                                                                                <div style="margin-left: 10px;margin-top: 5px;float: left">
+                                                                                    <div style="width: 200px;height: 100px;background-image: url(<%=application.getContextPath()%>/courseupload/${course.cMaster});">
+                                                                                        <div style="text-align: center" id="one" class="button">
+                                                                                            <span style="line-height: 100px" class="fa fa-play"><i class="ripple"></i></span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div style="height: 5px"></div>
+                                                                                    <div style="text-align: center">
+                                                                                        <span style="width:200px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis">${courseinfo.knobbleName}</span>
+                                                                                    </div>
+                                                                                    <div style="text-align: center">
+                                                                                        <a href="<%=application.getContextPath()%>/note${courseinfo.note}">
+                                                                                            <button style="margin-top: 0px;border-radius: 50px;border: 1px solid #ffb300;background-color: white;width: 100px;font-size: 10px">
+                                                                                                下载笔记
+                                                                                            </button>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div id="modal-container" class="close">
+                                                                                    <div class="modal-background">
+                                                                                        <div class="modal">
+                                                                                            <div>
+                                                                                                <video muted  style="width: 700px;height:460px"  autoplay="autoplay" controls = "controls">
+                                                                                                    <source src="<%=application.getContextPath()%>/video${courseinfo.video}" />
+                                                                                                </video>
+                                                                                            </div>
+                                                                                            <svg class="modal-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="none">
+                                                                                                <rect x="0" y="0" fill="none" width="226" height="162" rx="3" ry="3"></rect>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </c:if>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </c:forEach>
+                                                            </c:if>
                                                         </c:if>
-
                                                     </div>
                                                 </div>
                                             </div>
