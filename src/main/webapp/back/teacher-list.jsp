@@ -33,7 +33,7 @@
 <body>
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="./login.jsp">易学网</a></div>
+    <div class="logo"><a href="back/admin-index.jsp">易学网</a></div>
     <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
