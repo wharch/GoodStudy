@@ -26,7 +26,7 @@
 <body>
 <!-- 顶部开始 -->
 <div class="container">
-    <div class="logo"><a href="./login.jsp">易学网</a></div>
+    <div class="logo"><a href="back/admin-index.jsp">易学网</a></div>
     <div class="open-nav"><i class="iconfont">&#xe699;</i></div>
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
@@ -50,7 +50,7 @@
         <div id="side-nav">
             <ul id="nav">
                 <li class="list" current>
-                    <div class="logo"><a href="back/admin-index.jsp">易学网</a></div>
+                    <a href="back/admin-index.jsp">
                         <i class="iconfont">&#xe761;</i>
                         欢迎页面
                         <i class="iconfont nav_right">&#xe697;</i>
@@ -159,7 +159,7 @@
                                            ${ci.knobbleName}
                                        </td>
                                        <td>
-                                           <p style="display: none" id="video">${ci.video}</p>
+                                           <p style="display: none" class="video">${ci.video}</p>
                                            <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
                                                <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">查看视频</button>
                                            </div>
@@ -297,7 +297,6 @@
     })();
 </script>
 <script>
-    var a = $("#video").text();;
     layui.use('layer', function () { //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
         var active = {
@@ -311,7 +310,7 @@
                     , id: 'layerDemo' + type //防止重复弹出
                     , area: ['800px', '500px']
                     , title: '视频'
-                    , content:'<video  style="width: 700px;height:460px" controls = "controls"> <source src="<%=application.getContextPath()%>/video'+a+'"></source></video>'
+                    , content:'<video  style="width: 700px;height:460px" controls = "controls"> <source src="<%=application.getContextPath()%>/video'+$(othis).parent("div").prev("p").html().trim()+'"></source></video>'
                     , btn: '关闭全部'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩

@@ -145,7 +145,7 @@
                                 ${courseInfo.knobbleName}
                         </td>
                         <td>
-                            <p style="display: none" id="video">${courseInfo.video}</p>
+                            <p style="display: none" class="video">${courseInfo.video}</p>
                             <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">
                                 <button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">查看视频</button>
                             </div>
@@ -317,7 +317,6 @@
     }
 </script>
 <script>
-    var a = $("#video").text();;
     layui.use('layer', function () { //独立版的layer无需执行这一句
         var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
         var active = {
@@ -331,7 +330,7 @@
                     , id: 'layerDemo' + type //防止重复弹出
                     , area: ['800px', '500px']
                     , title: '视频'
-                    , content:'<video  style="width: 700px;height:460px" controls = "controls"> <source src="<%=application.getContextPath()%>/video'+a+'"></source></video>'
+                    , content:'<video  style="width: 700px;height:460px" controls = "controls"> <source src="<%=application.getContextPath()%>/video'+$(othis).parent("div").prev("p").html().trim()+'"></source></video>'
                     , btn: '关闭全部'
                     , btnAlign: 'c' //按钮居中
                     , shade: 0 //不显示遮罩

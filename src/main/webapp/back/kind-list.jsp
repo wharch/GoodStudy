@@ -58,7 +58,7 @@
         <div id="side-nav">
             <ul id="nav">
                 <li class="list" current>
-                    <a href="./login.jsp">
+                    <a href="back/admin-index.jsp">
                         <i class="iconfont">&#xe761;</i>
                         欢迎页面
                         <i class="iconfont nav_right">&#xe697;</i>
