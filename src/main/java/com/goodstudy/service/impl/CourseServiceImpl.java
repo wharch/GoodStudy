@@ -158,5 +158,4 @@ public class CourseServiceImpl implements CourseService {
     public boolean delCourse(int cId) {
         return dao.delCourse(cId);
     }
-
 }

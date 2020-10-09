@@ -41,7 +41,28 @@ public class KindServlet extends HttpServlet {
                 this.addKind(req,resp);
             }else if("doFindAllByPage".equals(op)){
                 this.doFindAllByPage(req, resp);
+            }else if("delete".equals(op)){
+                this.doDel(req,resp);
             }
+    }
+
+    /**
+     * 根据课程类别编号删除课程类别
+     * @param req
+     * @param resp
+     */
+    private void doDel(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String kindName = req.getParameter("kindName");
+        boolean b = kindService.removeKind(kindName);
+        if(b){
+            PrintWriter out = resp.getWriter();
+            out.write("yes");
+            out.flush();
+        }else{
+            PrintWriter out = resp.getWriter();
+            out.write("no");
+            out.flush();
+        }
     }
 
     /**
@@ -64,7 +85,6 @@ public class KindServlet extends HttpServlet {
      */
     private void doFindAllByPage(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String pageNum =  req.getParameter("pageNum");
-        System.out.println(pageNum);
         Page<Kind> KindByKIdByPage = kindService.findByPage(pageNum !=null ? Integer.valueOf(pageNum) : 1,3);
         req.setAttribute("KindByKIdByPage",KindByKIdByPage);
         req.getRequestDispatcher("/back/kind-list.jsp").forward(req,resp);
@@ -81,7 +101,13 @@ public class KindServlet extends HttpServlet {
         String kindName = req.getParameter("name");
         boolean info = this.kindService.addKind(new Kind(kindName));
 //        利用请求转发跳转界面 绝对路径
-        req.getRequestDispatcher("/back/kind-list.jsp").forward(req,resp);
+        if(info){
+            PrintWriter out = resp.getWriter();
+            out.write("<h1>添加成功</h1>");
+        }else{
+            PrintWriter out = resp.getWriter();
+            out.write("<h1>该类别已存在，请勿重复添加！</h1>");
+        }
 
     }
 }

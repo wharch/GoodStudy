@@ -10,13 +10,13 @@ import java.util.List;
  * 孙向锋
  * */
 public interface KindService {
-    //新增课程
+    //新增课程类别
     boolean addKind(Kind kind);
-    //根据名称查找
+    //根据名称查找课程类别
     Kind findByName(String kindName);
-    //修改课程信息
+    //修改课程类别信息
     boolean changeKind(Kind kind);
-    //根据课程名称删除课程
+    //根据课程名称删除课程类别
     boolean removeKind(String kindName);
     //根据课程名称查找
     //分页查询

@@ -240,20 +240,6 @@
     layui.use(['laydate'], function(){
         laydate = layui.laydate;//日期插件
 
-        //以上模块根据需要引入
-        //
-        //
-        //
-        //
-        // document.getElementById('LAY_demorange_s').onclick = function(){
-        //     start.elem = this;
-        //     laydate(start);
-        // }
-        // document.getElementById('LAY_demorange_e').onclick = function(){
-        //     end.elem = this
-        //     laydate(end);
-        // }
-
     });
 
     //批量删除提交

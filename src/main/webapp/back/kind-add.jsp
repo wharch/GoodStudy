@@ -49,7 +49,7 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">
                     </label>
-                    <button onclick="tankuang()" class="layui-btn" lay-filter="add" lay-submit="">
+                    <button  class="layui-btn" lay-filter="add" lay-submit="">
                         增加
                     </button>
                 </div>

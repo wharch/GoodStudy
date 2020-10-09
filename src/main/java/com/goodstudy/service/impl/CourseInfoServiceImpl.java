@@ -103,7 +103,7 @@ CourseInfoDao courseInfoDao = new CourseInfoDaoImpl();
      */
     @Override
     public List<CourseInfo> selectBysId(int sId) {
-        return null;
+        return courseInfoDao.selectBysId(sId);
     }
 
 

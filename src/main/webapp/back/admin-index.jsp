@@ -14,7 +14,7 @@
     <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/back/css/font.css">
+    <link rel="stylesheet" href="<%=application.getContextPath()%>/back/css/font.css">
     <link rel="stylesheet" href="<%=application.getContextPath()%>/back/lib/layui/css/layui.css">
     <link rel="stylesheet" href="<%=application.getContextPath()%>/back/css/xadmin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
@@ -85,13 +85,13 @@
                     </a>
                     <ul class="sub-menu" style="display:none">
                         <li>
-                            <a href="./echarts1.html">
+                            <a href="<%=application.getContextPath()%>/courseInfo?op=reviewVideo&infoState=2">
                                 <i class="iconfont">&#xe6a7;</i>
-                                课程列表
+                                视频审核
                             </a>
                         </li>
                         <li>
-                            <a href="./echarts2.html">
+                            <a href="<%=application.getContextPath()%>/kind?op=doFindAllByPage">
                                 <i class="iconfont">&#xe6a7;</i>
                                 分类列表
                             </a>

@@ -40,6 +40,12 @@ public class CourseInfoServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 更新课程详情的状态
+     * @param req
+     * @param resp
+     * @throws IOException
+     */
     private void updateState(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String state = req.getParameter("state");
         String infoId = req.getParameter("infoId");
@@ -58,12 +64,18 @@ public class CourseInfoServlet extends HttpServlet {
         String infoState = req.getParameter("infoState");
         String pageNum = req.getParameter("pageNum");
         Page<CourseInfo> courseInfos = service.findCrouseInfoByStateAndPage(Integer.valueOf(infoState), pageNum==null?1:Integer.valueOf(pageNum), 5);
-        System.out.println(courseInfos);
         req.setAttribute("courseinfo_page",courseInfos);
         req.setAttribute("state",infoState);
         req.getRequestDispatcher("/back/reviewVideo.jsp").forward(req,resp);
     }
 
+    /**
+     * 上传视频和笔记（添加一条课程详情）
+     * @param req
+     * @param resp
+     * @throws IOException
+     * @throws ServletException
+     */
     private void addCourseInfo(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         Part video = req.getPart("video");
         String knobbleName = req.getParameter("knobbleName");
