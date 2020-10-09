@@ -11,6 +11,11 @@ public class Collection {
     public Collection() {
     }
 
+    public Collection(Course course, Student student) {
+        this.course = course;
+        this.student = student;
+    }
+
     public Collection(int collectionId, Course course, Student student) {
         this.collectionId = collectionId;
         this.course = course;

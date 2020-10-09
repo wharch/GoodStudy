@@ -18,6 +18,10 @@ public class Student {
     }
 //有参构造
 
+    public Student(int stuId) {
+        this.stuId = stuId;
+    }
+
     public Student(int stuId, String stuName, String stuGender, String stuBirthday, String stuUserName, String stuPwd, String stuEmail, String stuHeadImg) {
         this.stuId = stuId;
         this.stuName = stuName;

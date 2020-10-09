@@ -290,13 +290,36 @@
                 <!-- Course Block -->
                 <div class="course-block col-lg-3 col-md-6 col-sm-12" style="float: left">
                     <div class="inner-box">
-                        <div class="image">
-                            <a href="<%=application.getContextPath()%>/course?op=showCourse&cId=${cou.cId}"><img
-                                    src="<%=application.getContextPath()%>/courseupload/${cou.cMaster}" alt=""/></a>
-<%--                            <div class="time">03 hours</div>--%>
+                        <div class="image"  style="width:310px;height:310px">
+                            <a href="<%=application.getContextPath()%>/course?op=showCourse&cId=${cou.cId}">
+                                <img src="<%=application.getContextPath()%>/courseupload/${cou.cMaster}" alt="" style="width:310px;height:310px"/>
+
+                            </a>
                         </div>
+                            <%--++++++++++++++++++++++++++++++++++++++++++++++++++以下是收藏按钮+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++--%>
+
                         <div class="lower-content">
                             <h6><a href="course-lesson.html">${cou.cName}</a></h6>
+                            <input hidden="hidden" value="${cou.cId}" type="text">
+                            <%--如果当前用户未登录--%>
+                            <c:if test="${sessionScope.admin == null}">
+                                <button style="border:0;background:none;margin-left: 280px" class="btn-collection"><img src="<%=application.getContextPath()%>/front/images/comment-img/star.png" class="collectionStar"  height="20px" width="20px"/></button>
+                            </c:if>
+                            <%--如果当前用户已经登录--%>
+                            <c:if test="${sessionScope.admin != null}">
+                                <c:set var="flag" value="false"></c:set>
+                                <c:forEach items="${requestScope.allCollectionByStuId}" var="collection">
+                                    <c:if test="${collection.course.cId == cou.cId}">
+                                        <c:set var="flag" value="true"></c:set>
+                                    </c:if>
+                                </c:forEach>
+                                <c:if test="${flag == 'true'}">
+                                    <button style="border:0;background:none;margin-left: 280px" class="btn-collection"><img src="<%=application.getContextPath()%>/front/images/comment-img/star_red.png" class="collectionStar"  height="20px" width="20px"/></button>
+                                </c:if>
+                                <c:if test="${flag == 'false'}">
+                                    <button style="border:0;background:none;margin-left: 280px" class="btn-collection"><img src="<%=application.getContextPath()%>/front/images/comment-img/star.png" class="collectionStar"  height="20px" width="20px"/></button>
+                                </c:if>
+                            </c:if>
                             <ul class="post-meta">
                                 <li>${cou.kind.kindName}</li>
                                 <li>${cou.cInfo}</li>
@@ -654,6 +677,46 @@
 <script src="<%=application.getContextPath()%>/front/js/jquery-ui.js"></script>
 <script src="<%=application.getContextPath()%>/front/js/script.js"></script>
 <script src="<%=application.getContextPath()%>/front/js/color-settings.js"></script>
+<script type="text/javascript">
+    //判断该民宿是否被收藏
+    //author : liumeiqi777
+    $(document).ready(function(){
+        // 为收藏的星星添加悬浮事件
+        $(".btn-collection").hover(function(){
+            if($(this).children(".collectionStar").attr("src") == '<%=application.getContextPath()%>/front/images/comment-img/star_red.png'){
+                $(this).children(".collectionStar").attr("src", "<%=application.getContextPath()%>/front/images/comment-img/star.png");
+            }else if($(this).children(".collectionStar").attr("src") == '<%=application.getContextPath()%>/front/images/comment-img/star.png'){
+                $(this).children(".collectionStar").attr("src", "<%=application.getContextPath()%>/front/images/comment-img/star_red.png");
+            }
+        })
+        //为收藏按钮添加点击ajax事件
+        // author liumeiqi777
+        $(".btn-collection").click(function(){
+            //获取session中存在的登陆用户是否为空，若为空则直接跳转登陆页面
+            var loginState="<%=session.getAttribute("admin")%>";
+            if(loginState == 'null'){
+                alert("请登录");
+                location.href="<%=application.getContextPath()%>/front/login.jsp"
+            }else if(loginState != null){
+                $.ajax({
+                    async:true,
+                    url:"${pageContext.request.contextPath}/collection",
+                    type:"post",
+                    data:{op:"changeCollection",cId:$(this).prev().val()},
+                    success:function(result,status,xhl){
+                        if($.trim(result)!="" || $.trim(result)!=null){//表示更改为收藏状态
+                            window.location.reload();
+                        }
+                    },
+                    //请求失败时的响应函数
+                    error:function(xhr,status,error){
+                        console.log("请求失败");
+                    }
+                });
+            }
 
+        });
+    });
+</script>
 </body>
 </html>

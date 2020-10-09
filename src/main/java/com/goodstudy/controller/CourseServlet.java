@@ -24,12 +24,14 @@ public class CourseServlet extends HttpServlet {
     private SectionService sectionService;
     private CourseInfoService courseInfoService;
     private OrderService orderService;
+    private CollectionService collectionService;
     public CourseServlet() {
         this.courseService = new CourseServiceImpl();
         this.kindService = new KindServiceImpl();
         this.sectionService = new SectionServiceImpl();
         this.courseInfoService = new CourseInfoServiceImpl();
         this.orderService = new OrderServiceImpl();
+        this.collectionService = new CollectionServiceImpl();
     }
 
     @Override
@@ -112,6 +114,10 @@ public class CourseServlet extends HttpServlet {
         String pageNum = req.getParameter("pageNum");
         String key = req.getParameter("key");
         Page<Course> courses = courseService.findAllCourseByPageLike(pageNum == null ? 1 : Integer.valueOf(pageNum), 8, key == null ? "" : key);
+        HttpSession session = req.getSession();
+        Student studentLogin = (Student) session.getAttribute("admin");
+        List<Collection> allCollectionByStuId = collectionService.findAllCollectionByStuId(studentLogin.getStuId());
+        req.setAttribute("allCollectionByStuId",allCollectionByStuId);
         req.setAttribute("courses",courses);
         req.setAttribute("cn",key);
         req.getRequestDispatcher("/front/courseList.jsp").forward(req,resp);
